@@ -11,6 +11,17 @@ composer install
 # Install Node Package Manager
 npm install
 
+# Create database file and name it 
+laraveldb
+
+# Import database file 
+laravel-project.sql
+
+#set configs in .env as followed:
+DB_DATABASE=laraveldb
+DB_USERNAME=root
+DB_PASSWORD=
+
 # Run Migrations
 php artisan migrate
 
@@ -26,9 +37,11 @@ php artisan key:generate
 ## App Info
 
 ### Authors
-Thanpong Supalak - 5810405029
-
+* Thanpong Supalak - 5810405029
 <a href="mailto:thanapong.su@ku.th?Subject=Regarding%20Laravel%20Project" target="_blank">Contact</a>
+*
+*
+*
 
 
 
