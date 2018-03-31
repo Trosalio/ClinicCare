@@ -14,21 +14,21 @@ npm install
 # Create database file and name it 
 laraveldb
 
-# Import database file 
+# Import database file --- NOT YET
 laravel-project.sql
 
-#set configs in .env as followed:
+# Set configs in .env as followed:
 DB_DATABASE=laraveldb
 DB_USERNAME=root
 DB_PASSWORD=
 
-# Run Migrations
+# Run Migrations --- NOT YET
 php artisan migrate
 
-# Import database data
+# Import database data --- NOT YET
 php artisan db:seed
 
-# Add virtual host if using Apache
+# Add virtual host if using Apache --- OPTIONAL
 
 # If you get an error about an encryption key
 php artisan key:generate
