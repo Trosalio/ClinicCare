@@ -26,4 +26,43 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * @param string|array $roles
+     * @return bool
+     */
+    public function authorizeRoles($roles)
+    {
+        if (is_array($roles)) {
+            return $this->hasAnyRole($roles) ||
+                abort(401, 'Unauthorized access.');
+        }
+        return $this->hasRole($roles) ||
+            abort(401, 'Unauthorized access.');
+    }
+
+    /**
+     * Check multiple roles
+     * @param array $roles
+     * @return bool
+     */
+    public function hasAnyRole($roles)
+    {
+        return $this->roles()->whereIn('name', $roles)->first() !== null;
+    }
+
+    /**
+     * Check one role
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole($role)
+    {
+        return $this->roles()->where('name', $role)->first() !== null;
+    }
 }
