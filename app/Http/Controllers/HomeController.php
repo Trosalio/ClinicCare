@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['app']]);
     }
 
     /**
@@ -26,11 +26,21 @@ class HomeController extends Controller
         return view('home');
     }
 
+    /**
+     * Show the page that can only access by admin.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function adminAccess(Request $request)
     {
         // request only grant user with role 'admin' to access
         // admin/dashboard.blade.php
         $request->user()->authorizeRoles('admin');
         return view('admin.dashboard');
+    }
+
+    public function app()
+    {
+        return view('layouts.app');
     }
 }

@@ -32,6 +32,21 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function admin()
+    {
+        return $this->hasOne(Models\Admin::class);
+    }
+
+    public function client()
+    {
+        return $this->hasOne(Models\Client::class);
+    }
+
+    public function doctor()
+    {
+        return $this->hasOne(Models\Doctor::class);
+    }
+
     /**
      * @param string|array $roles
      * @return bool
