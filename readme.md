@@ -32,25 +32,31 @@ php artisan db:seed
 php artisan key:generate
 
 # Add virtual host if using Apache --- OPTIONAL
-* For Windows User using XAMPP:
+```
 
-- In < C:\xampp\apache\conf\extra\ > open ' httpd-vhosts.conf ' and insert
->>
+### Adding Virtual Host For Windows User Using XAMPP:
+
+- In ```C:\xampp\apache\conf\extra\``` open ```httpd-vhosts.conf``` , insert
+
+```
 <VirtualHost *:80>
     ServerName <prefered-name>.test
     DocumentRoot "C:/xampp/htdocs/laravel-project/public"
 </VirtualHost>
-<<
+
+```
 and then save.
 
-- In < C:\Windows\System32\drivers\etc > open ' host ' as Administrator and insert
->>
+- In ```C:\Windows\System32\drivers\etc``` open ```host ``` as ```Administrator```, insert
+
+```
 127.0.0.1 <prefered-name>.test
-<<
+```
+
 and then save.
 
 Now, you should be able to open any prefered-browser, type <prefered-name>.test, and it should display laravel's project
-```
+
 
 ## App Info
 
