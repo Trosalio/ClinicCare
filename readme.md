@@ -28,10 +28,28 @@ php artisan migrate
 # Import database data --- NOT YET
 php artisan db:seed
 
-# Add virtual host if using Apache --- OPTIONAL
-
 # If you get an error about an encryption key
 php artisan key:generate
+
+# Add virtual host if using Apache --- OPTIONAL
+* For Windows User using XAMPP:
+
+- In < C:\xampp\apache\conf\extra\ > open ' httpd-vhosts.conf ' and insert
+>>
+<VirtualHost *:80>
+    ServerName <prefered-name>.test
+    DocumentRoot "C:/xampp/htdocs/laravel-project/public"
+</VirtualHost>
+<<
+and then save.
+
+- In < C:\Windows\System32\drivers\etc > open ' host ' as Administrator and insert
+>>
+127.0.0.1 <prefered-name>.test
+<<
+and then save.
+
+Now, you should be able to open any prefered-browser, type <prefered-name>.test, and it should display laravel's project
 ```
 
 ## App Info
