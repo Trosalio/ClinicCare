@@ -18,8 +18,8 @@
                             </div>
                         @endif
                             You are logged in! <br/>
-                            This is Admin Dashboard.<br/>
-                            Only user with Admin role may access this page.
+                            This is Doctor Dashboard.<br/>
+                            Only user with Doctor role may access this page.
                     </div>
                 </div>
             </div>

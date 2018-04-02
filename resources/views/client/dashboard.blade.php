@@ -17,9 +17,9 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                            You are logged in! <br/>
-                            This is Admin Dashboard.<br/>
-                            Only user with Admin role may access this page.
+                        You are logged in! <br/>
+                        This is Client Dashboard. <br/>
+                        Only user with Client role may access this page.
                     </div>
                 </div>
             </div>

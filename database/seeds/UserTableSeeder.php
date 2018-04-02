@@ -50,6 +50,7 @@ class UserTableSeeder extends Seeder
         $user_doctor->password = bcrypt('doctor');
         $user_doctor->save();
         $user_doctor->roles()->attach($role_doctor);
+        $user_doctor->roles()->attach($role_client);
 
         $doctor = new Doctor();
         $doctor->user()->associate($user_doctor);
