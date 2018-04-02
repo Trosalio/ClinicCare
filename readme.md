@@ -55,7 +55,7 @@ and then save.
 
 and then save.
 
-Now, you should be able to open any prefered-browser, type <prefered-name>.test, and it should display laravel's project
+Now, you should be able to open any prefered-browser, type ```<prefered-name>.test```, and it should display laravel's project
 
 
 ## App Info
