@@ -5,24 +5,24 @@
 @stop
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Dashboard</div>
+    <div class="container-fluid">
+        <div class="row">
+            {{-- Control Navbar --}}
+            <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Role Assignment</a>
+                    </li>
+                </ul>
+            </nav>
 
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                            You are logged in! <br/>
-                            This is Admin Dashboard.<br/>
-                            Only user with Admin role may access this page.
-                    </div>
-                </div>
-            </div>
+            {{-- Display a content according to Control Navbar--}}
+            <main class="col-sm-9  col-md-10 pt-3">
+                @include('admin.inc.dashboard.role-assignment')
+            </main>
         </div>
     </div>
 @stop
