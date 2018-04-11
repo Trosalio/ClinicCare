@@ -33,23 +33,9 @@ class LoginController extends Controller
 
     /**
      * Where to redirect users after login.
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     *  redirect to a proper route
      */
-    public function authenticated(Request $request)
+    public function authenticated()
     {
-        if ($request->user()->authorizeRoles('admin')) {
-            // request only grant user with role 'admin' to access
-            // admin/dashboard.blade.php
-            return redirect()->route('admin.dashboard');
-        } else if ($request->user()->authorizeRoles('doctor')) {
-            // request only grant user with role 'doctor' to access
-            // doctor/dashboard.blade.php
-            return redirect()->route('doctor.dashboard');
-        }
-        // request only grant user with role 'client' to access
-        // client/dashboard.blade.php
-        return redirect()->route('client.dashboard');
+        return redirect()->route('dashboard');
     }
 }

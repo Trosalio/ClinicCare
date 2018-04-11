@@ -47,6 +47,27 @@ class User extends Authenticatable
         return $this->hasOne(Models\Doctor::class);
     }
 
+    public function scopeAdminOnly($query)
+    {
+        return $query->whereHas('roles', function($nQuery){
+            $nQuery->where('name', 'admin');
+        });
+    }
+
+    public function scopeClientOnly($query)
+    {
+        return $query->whereHas('roles', function($nQuery){
+            $nQuery->where('name', 'client');
+        });
+    }
+
+    public function scopeDoctorOnly($query)
+    {
+        return $query->whereHas('roles', function($nQuery){
+            $nQuery->where('name', 'doctor');
+        });
+    }
+
     /**
      * @param string|array $roles
      * @return bool

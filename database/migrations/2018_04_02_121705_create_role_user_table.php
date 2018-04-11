@@ -13,10 +13,23 @@ class CreateRoleUserTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('role_user', function (Blueprint $table) {
             $table->increments('id');
+
+            // refer and enforce foreign keys
+            // refer to Role
             $table->unsignedInteger('role_id');
+            $table->foreign('role_id')
+                ->references('id')
+                ->on('roles')
+                ->onDelete('cascade');
+            // refer to User
             $table->unsignedInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')->
+                on('users')
+                ->onDelete('cascade');
         });
     }
 
