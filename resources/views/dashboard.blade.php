@@ -4,7 +4,7 @@
     <meta http-equiv="refresh" content="5; url={{$redirect}}"/>
 @endpush
 
-@section('title', Auth::user()->name )
+@section('title', Auth::user()->username )
 
 @section('navbar')
     @include('inc.navbar')
