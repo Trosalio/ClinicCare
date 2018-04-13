@@ -12,20 +12,20 @@
         </tr>
         </thead>
         <tbody>
-        @for($i = 0; $i < count($users); $i++)
+        @foreach($users as $index=>$user)
             <tr>
-                <td>{{ $i+($users->firstItem()) }}</td>
-                <td>{{ $users[$i]->username }}</td>
-                <td>{{ $users[$i]->email }}</td>
-                @if($users[$i]->admin)
+                <td>{{ $index+($users->firstItem()) }}</td>
+                <td>{{ $user->username }}</td>
+                <td>{{ $user->email }}</td>
+                @if($user->admin)
                     <td>Admin</td>
-                @elseif($users[$i]->doctor)
+                @elseif($user->doctor)
                     <td>Doctor</td>
                 @else
                     <td>Client</td>
                 @endif
             </tr>
-        @endfor
+        @endforeach
         </tbody>
     </table>
 </div>
