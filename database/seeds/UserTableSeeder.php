@@ -63,5 +63,14 @@ class UserTableSeeder extends Seeder
         $c_doctor = new Client();
         $c_doctor->user()->associate($user_doctor);
         $c_doctor->save();
+
+        factory(User::class, 30)->create()->each(function ($user) use ($role_client) {
+            if($user->save()){
+                $user->roles()->attach($role_client);
+                $client = new Client();
+                $client->user()->associate($user);
+                $client->save();
+            }
+        });
     }
 }

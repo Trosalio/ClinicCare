@@ -12,24 +12,24 @@
         </tr>
         </thead>
         <tbody>
-        @php $users = App\User::all()  @endphp
         @for($i = 0; $i < count($users); $i++)
-            @php
-                $user = $users[$i];
-                $role = 'Client';
-                if ($user->admin) {
-                    $role = 'Admin';
-                } else if ($user->doctor) {
-                    $role = 'Doctor';
-                }
-            @endphp
             <tr>
-                <td>{{ $i+1 }}</td>
-                <td>{{ $user->username }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $role }}</td>
+                <td>{{ $i+($users->firstItem()) }}</td>
+                <td>{{ $users[$i]->username }}</td>
+                <td>{{ $users[$i]->email }}</td>
+                @if($users[$i]->admin)
+                    <td>Admin</td>
+                @elseif($users[$i]->doctor)
+                    <td>Doctor</td>
+                @else
+                    <td>Client</td>
+                @endif
             </tr>
         @endfor
         </tbody>
     </table>
+</div>
+{{ $users->links() }}
+<div class="text-center">
+    <button type="button" class="btn btn-primary">Save as PDF</button>
 </div>

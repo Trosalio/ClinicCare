@@ -21,7 +21,7 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 // Routes for admin
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', 'DashboardController@adminDashboard')->name('admin.dashboard');
+    Route::get('/dashboard/{includedContent?}', 'DashboardController@adminDashboard')->name('admin.dashboard');
 });
 
 

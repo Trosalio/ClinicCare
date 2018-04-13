@@ -43,14 +43,19 @@ class DashboardController extends Controller
     /**
      * Show the page that can only access by admin.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param String $includedContent
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function adminDashboard(Request $request)
+    public function adminDashboard(Request $request, String $includedContent
+    = 'reports')
     {
         // request only grant user with role 'admin' to access
         // admin/dashboard.blade.php
-        if($request->user()->authorizeRoles('admin')){
-            return view('admin.dashboard');
+        if ($request->user()->authorizeRoles('admin')) {
+            $users = \App\User::paginate(10);
+            return view('admin.dashboard')
+                ->with(['includedContent' => $includedContent, 'users' => $users]);
         }
         return redirect()->route('welcomePage');
     }
@@ -59,7 +64,7 @@ class DashboardController extends Controller
     {
         // request only grant user with role 'client' to access
         // client/dashboard.blade.php
-        if($request->user()->authorizeRoles('client')){
+        if ($request->user()->authorizeRoles('client')) {
             return view('client.dashboard');
         }
         return redirect()->route('welcomePage');
@@ -69,7 +74,7 @@ class DashboardController extends Controller
     {
         // request only grant user with role 'doctor' to access
         // doctor/dashboard.blade.php
-        if($request->user()->authorizeRoles('doctor')){
+        if ($request->user()->authorizeRoles('doctor')) {
             return view('doctor.dashboard');
         }
         return redirect()->route('welcomePage');

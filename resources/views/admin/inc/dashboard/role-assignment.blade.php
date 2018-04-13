@@ -11,41 +11,32 @@
         </tr>
         </thead>
         <tbody>
-        @php $users = App\User::all() @endphp
         @for($i = 0; $i < count($users); $i++)
-            @php
-                $user = $users[$i];
-                $roles = array();
-                foreach ($user->roles as $role) {
-                    $roles[] = $role->name;
-                }
-            @endphp
-
             <tr>
-                <td>{{ $i+1 }}</td>
-                <td>{{ $user->username }}</td>
+                <td>{{ $i+($users->firstItem()) }}</td>
+                <td>{{$users[$i]->username }}</td>
                 <td>
-                    @if($user->admin)
+                    @if($users[$i]->admin)
                         Admin
                     @else
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="{{ $user->username.'-as-client'
+                            <input type="radio" id="{{ $users[$i]->username.'-as-client'
                              }}"
-                                   name="{{ 'radio-group-of-'.$user->username }}"
-                                   class="custom-control-input" {{$user->client ?
-                                   $user->doctor ? '' : 'checked' : ''}}>
+                                   name="{{'radio-group-of-'.$users[$i]->username }}"
+                                   class="custom-control-input" {{$users[$i]->client ?
+                                   $users[$i]->doctor ? '' : 'checked' : ''}}>
                             <label class="custom-control-label"
-                                   for="{{ $user->username.'-as-client' }}"
+                                   for="{{ $users[$i]->username.'-as-client' }}"
                             >Client</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="{{ $user->username.'-as-doctor'
+                            <input type="radio" id="{{ $users[$i]->username.'-as-doctor'
                              }}"
-                                   name="{{'radio-group-of-'.$user->username }}"
-                                   class="custom-control-input" {{$user->doctor ?
+                                   name="{{'radio-group-of-'.$users[$i]->username }}"
+                                   class="custom-control-input" {{$users[$i]->doctor ?
                                    'checked' : ''}}>
                             <label class="custom-control-label"
-                                   for="{{ $user->username.'-as-doctor' }}"
+                                   for="{{ $users[$i]->username.'-as-doctor' }}"
                             >Doctor</label>
                         </div>
                     @endif
@@ -55,6 +46,7 @@
         </tbody>
     </table>
 </div>
+{{ $users->links() }}
 <div class="text-center">
     <button type="button" class="btn btn-primary">Save</button>
     <button type="button" class="btn btn-secondary">Cancel</button>
