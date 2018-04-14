@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'ADMIN')
+
 @section('navbar')
     @include('inc.navbar')
 @stop

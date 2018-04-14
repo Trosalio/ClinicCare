@@ -21,17 +21,18 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 // Routes for admin
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard/{includedContent?}', 'DashboardController@adminDashboard')->name('admin.dashboard');
+    Route::get('/dashboard/{includedContent?}', 'AdminController@index')
+        ->name('admin.dashboard');
 });
 
 
 // Routes for client
 Route::prefix('client')->group(function () {
-    Route::get('/dashboard', 'DashboardController@clientDashboard')->name('client.dashboard');
+    Route::get('/dashboard', 'ClientController@index')->name('client.dashboard');
 });
 
 
 // Routes for doctor
 Route::prefix('doctor')->group(function () {
-    Route::get('/dashboard', 'DashboardController@doctorDashboard')->name('doctor.dashboard');
+    Route::get('/dashboard', 'DoctorController@index')->name('doctor.dashboard');
 });
