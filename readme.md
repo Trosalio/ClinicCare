@@ -22,10 +22,10 @@ DB_DATABASE=laraveldb
 DB_USERNAME=root
 DB_PASSWORD=
 
-# Run Migrations --- NOT YET
+# Run Migrations
 php artisan migrate
 
-# Import database data --- NOT YET
+# Import database data
 php artisan db:seed
 
 # If you get an error about an encryption key
@@ -57,6 +57,17 @@ and then save.
 
 Now, you should be able to open any prefered-browser, type ```<prefered-name>.test```, and it should display laravel's project
 
+### Adding Virtual Host For Windows User Using Laragon:
+
+- Put project folder in ```C:\laragon\www```
+
+- Try to access via browser with ```<project-name>.test```
+
+- If it shows a root directory
+
+*Band-aid-solution*: access via ```<project-name>.test/public```
+
+*Permanent-solution*: consult Google :DDD
 
 ## App Info
 
