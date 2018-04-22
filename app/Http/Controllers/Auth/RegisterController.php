@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\Client;
-use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -68,13 +67,13 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'role' => 'admin',
         ]);
         if($user->save()){
-            $user->roles()->attach(Role::where('name', 'client')->first());
+            $client = new Client();
+            $client->user()->associate($user);
+            $client->save();
         };
-        $client = new Client();
-        $client->user()->associate($user);
-        $client->save();
         return $user;
     }
 }

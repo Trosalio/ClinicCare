@@ -11,8 +11,6 @@ class Client extends Model
 {
     use Notifiable;
 
-    public $timestamps = false;
-
     public function user()
     {
         return $this->belongsTo(User::class);

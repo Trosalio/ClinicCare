@@ -15,8 +15,16 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->increments('id');
+            //refer to User
             $table->unsignedInteger('user_id');
             $table->string('medical_license_no')->nullable();
+            $table->timestamps();
+
+            // enforce foreign key
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

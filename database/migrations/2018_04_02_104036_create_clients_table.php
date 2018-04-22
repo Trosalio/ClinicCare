@@ -15,6 +15,7 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
+            //refer to User
             $table->unsignedInteger('user_id');
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
@@ -26,6 +27,13 @@ class CreateClientsTable extends Migration
             $table->enum('blood_type', ['A+','A-','B+','B-','O+','O-','AB+','AB-'])->nullable();
             $table->text('intolerances')->nullable();
             $table->text('health_conditions')->nullable();
+            $table->timestamps();
+
+            // enforce foreign key
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
