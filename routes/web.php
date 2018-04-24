@@ -13,13 +13,30 @@
 
 Route::get('/', function () {
     return view('welcome');
-})->name('welcomePage');
+})->name('homepage');
 
 Route::auth();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-// Routes for admin
+// Routes for client & doctor
+Route::group(['middleware' => ['auth', 'check_role:client,doctor']], function () {
+    Route::group(['prefix' => 'client'], function () {
+        Route::get('dashboard', 'ClientController@index')->name('client.dashboard');
+    });
+    Route::get('profile', 'ClientController@profile')->name('profile');
+});
+
+// Routes exclusively for doctor
+Route::group(
+    ['middleware' => ['auth', 'check_role:doctor'], 'prefix' => 'doctor'],
+    function () {
+        Route::get('dashboard', 'DoctorController@index')
+            ->name('doctor.dashboard');
+    }
+);
+
+// Routes exclusively for admin
 Route::group(
     ['middleware' => ['auth', 'check_role:admin'], 'prefix' => 'admin'],
     function () {
@@ -27,25 +44,5 @@ Route::group(
         Route::get('show/{user}', 'UserController@show')->name('users.show');
         Route::put('show/{user}', 'UserController@update')->name('users.update');
         Route::delete('show/{user}', 'UserController@destroy')->name('users.destroy');
-    }
-);
-
-
-// Routes for client
-Route::group(
-    ['middleware' => ['auth', 'check_role:client,doctor'], 'prefix' => 'client'],
-    function () {
-        Route::get('/dashboard', 'ClientController@index')
-            ->name('client.dashboard');
-    }
-);
-
-
-// Routes for doctor
-Route::group(
-    ['middleware' => ['auth', 'check_role:doctor'], 'prefix' => 'doctor'],
-    function () {
-        Route::get('/dashboard', 'DoctorController@index')
-            ->name('doctor.dashboard');
     }
 );

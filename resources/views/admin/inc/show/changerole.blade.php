@@ -14,7 +14,7 @@
             changeRole
         @endslot
         @slot('modal_title')
-            <strong>Changing User's Role</strong>
+            <strong>Changing {{  $user->username }}'s Role</strong>
         @endslot
         @slot('modal_body')
             <div class="form-group row">

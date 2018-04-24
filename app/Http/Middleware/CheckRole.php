@@ -18,7 +18,7 @@ class CheckRole
     public function handle($request, Closure $next, ...$roles)
     {
         if(!$this->authorized($request->user(), $roles)){
-            return redirect()->route('welcomePage');
+            return redirect()->route('homepage');
         }
         return $next($request);
     }

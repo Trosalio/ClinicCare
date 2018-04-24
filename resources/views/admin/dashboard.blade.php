@@ -2,10 +2,6 @@
 
 @section('title', 'ADMIN')
 
-@section('navbar')
-    @include('inc.navbar')
-@stop
-
 @section('content')
     <div class="container-fluid">
         <main>
@@ -13,8 +9,3 @@
         </main>
     </div>
 @stop
-
-@push('script')
-    <script src="{{ asset('js/dashboard.js') }}"></script>
-@endpush
-

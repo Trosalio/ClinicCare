@@ -11,7 +11,7 @@
         deleteUser
     @endslot
     @slot('modal_title')
-        <strong>Deleting User...</strong>
+        <strong>Deleting User: {{  $user->username }}</strong>
     @endslot
     @slot('modal_body')
         Are you sure you want to delete this
