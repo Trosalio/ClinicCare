@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @stack('meta')
     <title>Clinic Care - @yield('title')</title>
+    <link rel="icon" href="{{ asset('icon.png') }}">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"
@@ -19,7 +20,7 @@
     <!-- Styles -->
     @stack('style')
 </head>
-<body class="fixed-nav sticky-footer">
+<body class="fixed-nav sticky-footer sidenav-toggled">
 <div id="app">
     @section('navbar')
         @include('inc.navbar')

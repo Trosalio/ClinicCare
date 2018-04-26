@@ -2,7 +2,7 @@
 <hr/>
 <h2>Member List</h2>
 <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table">
         <thead>
         <tr>
             <th>#</th>
@@ -13,8 +13,8 @@
         </thead>
         <tbody>
         @foreach($users as $user)
-            <tr onclick="window.location.assign('{{ route('users.show', [$user]) }}')">
-                <td>{{ $loop->index +($users->firstItem()) }}</td>
+            <tr>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->email }}</td>
                 @if($user->role === 'admin')
@@ -29,16 +29,3 @@
         </tbody>
     </table>
 </div>
-{{ $users->links() }}
-<div class="text-center">
-    <button type="button" class="btn btn-primary">Save as PDF</button>
-</div>
-
-@push('style')
-    <style>
-        tbody tr:hover {
-            color: blue;
-            cursor: pointer;
-        }
-    </style>
-@endpush

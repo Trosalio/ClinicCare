@@ -19,7 +19,7 @@
                         @endif
                         You are logged in! <br/>
                         This is Client Dashboard. <br/>
-                        Only user with Client role may access this page.
+                            User with Client or Doctor role may access this page.
                     </div>
                 </div>
             </div>

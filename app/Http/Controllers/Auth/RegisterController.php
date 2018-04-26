@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -38,6 +38,17 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    // redirect user if attempt to blind enter register link
+    public function showRegistrationForm()
+    {
+        return redirect()->route('login');
+    }
+
+    public function register()
+    {
+
     }
 
     /**

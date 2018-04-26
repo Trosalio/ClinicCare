@@ -4,6 +4,7 @@
 
 @section('content')
     <h1>Profile: {{ ucfirst(Auth::user()->username) }}</h1>
+    <a href="{{ route('profile.edit') }}"><i class="fas fa-wrench"></i> Edit Profile</a>
     <hr class="mb-4">
     <div class="row">
         <div class="col-md-6 mb-3">
@@ -75,7 +76,7 @@
             <div class="col-md-6 mb-3">
                 <strong class="col-3">Gender</strong>
                 <div class="col-12">
-                    {{ Auth::user()->client->gender ?? 'No gender info given'}}
+                    {{ (Auth::user()->client->gender === 'm' ? 'Male' : 'Female') ?? 'No gender info given'}}
                 </div>
             </div>
             <div class="col-md-6 mb-3">

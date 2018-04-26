@@ -17,14 +17,12 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-
 // Routes for client & doctor
 Route::group(['middleware' => ['auth', 'check_role:client,doctor']], function () {
-    Route::group(['prefix' => 'client'], function () {
-        Route::get('dashboard', 'ClientController@index')->name('client.dashboard');
-    });
+    Route::get('dashboard', 'ClientController@index')->name('dashboard');
     Route::get('profile', 'ClientController@profile')->name('profile');
+    Route::put('profile', 'ClientController@update')->name('profile.update');
+    Route::get('profile/edit', 'ClientController@edit')->name('profile.edit');
 });
 
 // Routes exclusively for doctor
@@ -40,9 +38,8 @@ Route::group(
 Route::group(
     ['middleware' => ['auth', 'check_role:admin'], 'prefix' => 'admin'],
     function () {
-        Route::get('dashboard', 'UserController@index')->name('admin.dashboard');
-        Route::get('show/{user}', 'UserController@show')->name('users.show');
-        Route::put('show/{user}', 'UserController@update')->name('users.update');
-        Route::delete('show/{user}', 'UserController@destroy')->name('users.destroy');
+        Route::resource('users', 'UserController')->except(['index']);
+        Route::get('dashboard', 'UserController@index')->name('users.index');
+        Route::get('pdf', 'UserController@savePDF')->name('users.savePDF');
     }
 );

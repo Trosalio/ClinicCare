@@ -1,7 +1,7 @@
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-laravel bg-light fixed-top" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
     <a class="navbar-brand" href="{{ route('homepage') }}">
-        <img src="{{ asset('icon.png') }}" width="30px" height="30px"/>
+        <i class="fas fa-plus-circle fa-2x"></i>
         <strong>Clinic Care</strong>
     </a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -9,7 +9,14 @@
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarResponsive">
+        @auth
+        <ul class="navbar-nav navbar-sidenav" id="accordion">
+                @if(Auth::user()->isAdmin())
+                    @include('admin.inc.navbar')
+                @endif
+        </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
                 <a class="nav-link text-center" id="sidenavToggler">
@@ -17,11 +24,11 @@
                 </a>
             </li>
         </ul>
+        @endauth
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
             @guest
                 <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
             @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -29,9 +36,8 @@
                         {{ Auth::user()->username }} <span
                                 class="caret"></span>
                     </a>
-
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @if(Auth::user()->role !== 'admin')
+                        @if(!Auth::user()->isAdmin())
                             <a class="dropdown-item" href="{{ route('profile') }}">
                                 {{ __('Profile') }}
                             </a>

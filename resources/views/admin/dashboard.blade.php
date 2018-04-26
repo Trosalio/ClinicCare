@@ -5,7 +5,7 @@
 @section('content')
     <div class="container-fluid">
         <main>
-            @include('admin.inc.dashboard.reports')
+            @include('admin.users.reports')
         </main>
     </div>
 @stop

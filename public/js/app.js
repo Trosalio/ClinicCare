@@ -13882,6 +13882,12 @@ window.Vue = __webpack_require__(36);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+// Vue.component('user-report', require('./components/userReport.vue'));
+//
+// let vm = new Vue({
+//     el: '#app',
+// });
+
 /***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {

@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Models\Doctor::class);
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 }
