@@ -4,10 +4,10 @@ $(document).ready(function () {
     let clientInfo = $('#client-info');
     let doctorInfo = $('#doctor-info');
 
-    if(clientInput.is(':checked')) {
+    if (clientInput.is(':checked')) {
         clientInfo.show();
     }
-    if(doctorRadioInput.is(':checked')){
+    if (doctorRadioInput.is(':checked')) {
         clientInfo.show();
         doctorInfo.show();
     }

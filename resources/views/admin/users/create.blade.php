@@ -166,8 +166,7 @@
                     </label>
                     <textarea class="form-control col-sm-9 col-md-10"
                               cols="80" rows="5"
-                              id="intolerances" name="intolerances" placeholder="Optional">
-                        {{ old('intolerances') }}</textarea>
+                              id="intolerances" name="intolerances" placeholder="Optional">{{ old('intolerances') }}</textarea>
                 </div>
                 <!-- Health Condition(s)(Optional) -->
                 <div class="form-group row">
@@ -176,14 +175,70 @@
                     </label>
                     <textarea class="form-control col-sm-9 col-md-10"
                               cols="80" rows="5"
-                              id="health_conditions" name="health_conditions" placeholder="Optional">
-                        {{ old('health_conditions') }}</textarea>
+                              id="health_conditions" name="health_conditions" placeholder="Optional">{{ old('health_conditions') }}</textarea>
                 </div>
             </div>
             <div id="doctor-info" style="display: none">
                 <hr class="mb-4">
                 <h3>Doctor Info</h3>
                 <br/>
+                <!-- Work Day and Hour -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5>Work Days(Between Weekdays)</h5>
+                        <div class="form-group row">
+                            <div class="form-group col-12">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="all_day"
+                                           name="work_day"
+                                           class="custom-control-input"
+                                           value="0" {{ empty(old('work_day')) ? 'checked' : (old('work_day') === 0) ? 'checked' : '' }}>
+                                    <label class="custom-control-label"
+                                           for="all_day">All WeekDays</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="select_day"
+                                           name="work_day"
+                                           class="custom-control-input"
+                                           value="1" {{ empty(old('work_day')) ? '' : (old('work_day') === 1) ? 'checked' : '' }}>
+                                    <label class="custom-control-label"
+                                           for="select_day">Select Days</label>
+                                </div>
+                            </div>
+                            <div id="select-custom-day" class="form-group col-12" style="display: none">
+                                @foreach(["1" => "Monday", "2" => "Tuesday", "3" => "Wednesday", "4" => "Thursday", "5" => "Friday"] as $index => $day)
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="weekday[]" id="{{ 'weekday-'.$index }}"
+                                               value="{{ $index }}">
+                                        <label class="form-check-label" for="{{ 'weekday-'.$index }}">{{ $day }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>Work Hours(From 9-17)</h5>
+                        <div class="form-group row">
+                            <div class="form-group row col-md-6">
+                                <label class="col-sm-3 col-md-2" for="start_hour">
+                                    <strong>From </strong>
+                                </label>
+                                <input class="form-control col-sm-7 col-md-8" type="number"
+                                       id="start_hour" name="start_hour"
+                                       value="{{ old('start_hour') }}" min="9" max="16"/>
+                            </div>
+                            <div class="form-group row col-md-6">
+                                  <label class="col-sm-3 col-md-2" for="end_hour">
+                                    <strong>To </strong>
+                                </label>
+                                <input class="form-control col-sm-7 col-md-8" type="number"
+                                       id="end_hour" name="end_hour"
+                                       value="{{ old('end_hour') }}" min="10" max="17"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Medical License Number -->
                 <div class="form-group row">
                     <label class="col-sm-3 col-md-2" for="medical_license_no">
                         <strong>Medical License:</strong>
@@ -205,6 +260,12 @@
     </div>
 @stop
 
+@push('style')
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha18/css/tempusdominus-bootstrap-4.min.css"/>
+@endpush
+
 @push('script')
     <script src="{{ asset('js/admin-create.js') }}"></script>
+    <script src="{{ asset('js/workday-info.js') }}"></script>
 @endpush

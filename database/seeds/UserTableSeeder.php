@@ -29,7 +29,7 @@ class UserTableSeeder extends Seeder
         $user_client->password = bcrypt('client');
         $user_client->role = 'client';
         if($user_client->save()){
-            $client = new Client();
+            $client = factory(Client::class)->make();
             $client->user()->associate($user_client);
             $client->save();
         }
@@ -42,22 +42,22 @@ class UserTableSeeder extends Seeder
         $user_doctor->role = 'doctor';
         if($user_doctor->save()){
             // doctor is a doctor!
-            $doctor = new Doctor();
+            $doctor = factory(Doctor::class)->make();
             $doctor->user()->associate($user_doctor);
             $doctor->save();
             // but also is a client!
-            $c_doctor = new Client();
+            $c_doctor = factory(Client::class)->make();
             $c_doctor->user()->associate($user_doctor);
             $c_doctor->save();
         }
 
         factory(User::class, 30)->create()->each(function ($user) {
             if($user->save()){
-                $client = new Client();
+                $client = factory(Client::class)->make();
                 $client->user()->associate($user);
                 $client->save();
                 if($user->role === 'doctor'){
-                    $doctor = new Doctor();
+                    $doctor = factory(Doctor::class)->make();
                     $doctor->user()->associate($user);
                     $doctor->save();
                 }

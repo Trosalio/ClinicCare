@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group col-md-6 mb-3">
                     <label class="col-3" for="lastname"><strong>Last name</strong></label>
-                    <input class="form-control col-md-10" type="email" id="lastname" name="lastname"
+                    <input class="form-control col-md-10" type="text" id="lastname" name="lastname"
                            value="{{ old('lastname') ?? Auth::user()->client->lastname }}"/>
                 </div>
             </div>
@@ -126,15 +126,76 @@
                 <hr class="mb-4">
                 <h3>Doctor Info</h3>
                 <div class="row">
+                    <div class="col-sm-6">
+                        <h5>Work Days(Between Weekdays)</h5>
+                        <div class="form-group row">
+                            <div class="form-group col-12">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="all_day"
+                                           name="work_day"
+                                           class="custom-control-input"
+                                           value="0" {{ empty(old('work_day')) ? 'checked' : (old('work_day') === 0) ? 'checked' : '' }}>
+                                    <label class="custom-control-label"
+                                           for="all_day">All WeekDays</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="select_day"
+                                           name="work_day"
+                                           class="custom-control-input"
+                                           value="1" {{ empty(old('work_day')) ? '' : (old('work_day') === 1) ? 'checked' : '' }}>
+                                    <label class="custom-control-label"
+                                           for="select_day">Select Days</label>
+                                </div>
+                            </div>
+                            <div id="select-custom-day" class="form-group col-12" style="display: none">
+                                @foreach(["1" => "Monday", "2" => "Tuesday", "3" => "Wednesday", "4" => "Thursday", "5" => "Friday"] as $index => $day)
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="weekday[]"
+                                               id="{{ 'weekday-'.$index }}"
+                                               value="{{ $index }}" {{ in_array($index, json_decode(Auth::user()->doctor->weekday)) ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="{{ 'weekday-'.$index }}">{{ $day }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>Work Hours(From 9-17)</h5>
+                        <div class="form-group row">
+                            <div class="form-group row col-md-6">
+                                <label class="col-sm-3 col-md-2" for="start_hour">
+                                    <strong>From </strong>
+                                </label>
+                                <input class="form-control col-sm-7 col-md-8" type="number"
+                                       id="start_hour" name="start_hour"
+                                       value="{{ old('start_hour') ?? Auth::user()->doctor->start_hour }}" min="9"
+                                       max="16"/>
+                            </div>
+                            <div class="form-group row col-md-6">
+                                <label class="col-sm-3 col-md-2" for="end_hour">
+                                    <strong>To </strong>
+                                </label>
+                                <input class="form-control col-sm-7 col-md-8" type="number"
+                                       id="end_hour" name="end_hour"
+                                       value="{{ old('end_hour') ?? Auth::user()->doctor->end_hour }}" min="10"
+                                       max="17"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-12 mb-3">
                         <label class="col-3" for="medical_license_no"><strong>Medical License</strong></label>
                         <div class="col-6">
                             <input class="form-control col-md-10" type="text" id="medical_license_no"
                                    name="medical_license_no"
-                                   value="{{ old('medical_license_no') ?? Auth::user()->client->medical_license_no }}"/>
+                                   value="{{ old('medical_license_no') ?? Auth::user()->doctor->medical_license_no }}"/>
                         </div>
                     </div>
                 </div>
+                @push('script')
+                    <script src="{{ asset('js/workday-info.js') }}"></script>
+                @endpush
             @endif
             <hr class="mb-4">
             <div class="text-center mb-4">

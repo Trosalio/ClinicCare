@@ -20,6 +20,16 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @return User[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function api()
+    {
+        return User::all();
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function index()
@@ -51,40 +61,53 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // validate user data
+//         validate user data
         $request->validate([
             'username' => 'required|string|between:4,20|unique:users,username',
             'password' => 'required|between:6,20|confirmed',
             'email' => 'required|email|between:4,50|unique:users,username',
             'role' => ['required', Rule::in(UserController::$roles)],
         ]);
+
+        if($request->input('role') === 'doctor'){
+            $request->validate([
+                'work_day' => 'required|boolean',
+                'weekday' => 'required_if:work_day,1',
+                'start_hour' => 'required|numeric',
+                'end_hour' => 'required|numeric',
+                'medical_license_no' => 'required|string|size:10|unique:doctors,medical_license_no'
+            ]);
+        }
+        $request->validate([
+            'firstname' => 'required|alpha',
+            'lastname' => 'required|alpha',
+            'id_no' => 'required|numeric|digits:13|unique:clients,id_no',
+            'tel_no' => 'required|numeric|digits:10|unique:clients,tel_no',
+            'gender' => ['required', Rule::in(UserController::$gender)],
+            'weight' => 'required|numeric|digits:3',
+            'height' => 'required|numeric|digits:3',
+            'blood_type' => ['required', Rule::in(UserController::$blood_types)],
+            'intolerances' => 'nullable|string',
+            'health_conditions' => 'nullable|string',
+        ]);
         $user = new User;
         $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->role = $request->input('role');
-        if($request->input('role') === 'doctor'){
-            $request->validate([
-                'medical_license_no' => 'nullable|string|size:10|unique:doctors,medical_license_no'
-            ]);
-        }
-        $request->validate([
-            'firstname' => 'nullable|alpha',
-            'lastname' => 'nullable|alpha',
-            'id_no' => 'nullable|numeric|digits:13|unique:clients,id_no',
-            'tel_no' => 'nullable|numeric|digits:10|unique:clients,tel_no',
-            'gender' => ['required', Rule::in(UserController::$gender)],
-            'weight' => 'nullable|numeric|digits:3',
-            'height' => 'nullable|numeric|digits:3',
-            'blood_type' => ['required', Rule::in(UserController::$blood_types)],
-            'intolerances' => 'nullable|string',
-            'health_conditions' => 'nullable|string',
-        ]);
         if ($user->save()) {
             if ($user->role === 'doctor') {
                 // validate doctor data
                 $doctor = new Doctor;
                 $doctor->medical_license_no = $request->input('medical_license_no');
+                $doctor->work_day = $request->input('work_day');
+                if($request->input('work_day')){
+                    $doctor->weekday = json_encode($request->input('weekday'));
+                } else {
+                    $doctor->weekday = null;
+                }
+                $doctor->start_hour = $request->input('start_hour');
+                $doctor->end_hour = $request->input('end_hour');
                 $doctor->user()->associate($user);
                 $doctor->save();
             }
@@ -144,16 +167,16 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validatedData = $request->validate([
-            'username' => ['required', 'string', 'between:4,20', Rule::unique
-            ('users')->ignore($user->id)],
-            'email' => ['required', 'email', 'between:4,50', Rule::unique
-            ('users')->ignore($user->id)],
             'role' => ['required', Rule::in(UserController::$roles)],
         ]);
 
         if ($user->update($validatedData)) {
             if ($user->role === 'doctor') {
                 $doctor = new Doctor();
+                $doctor->medical_license_no = '0000000000';
+                $doctor->work_day = false;
+                $doctor->start_hour = 9;
+                $doctor->end_hour = 17;
                 $doctor->user()->associate($user);
                 $doctor->save();
             } elseif ($user->role === 'client') {

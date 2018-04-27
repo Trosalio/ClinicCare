@@ -17,7 +17,11 @@ class CreateDoctorsTable extends Migration
             $table->increments('id');
             //refer to User
             $table->unsignedInteger('user_id');
-            $table->string('medical_license_no')->nullable();
+            $table->string('medical_license_no', 10)->default('0123456789');
+            $table->boolean('work_day')->default(false);
+            $table->text('weekday')->nullable();
+            $table->unsignedInteger('start_hour')->default(9);
+            $table->unsignedInteger('end_hour')->default(17);
             $table->timestamps();
 
             // enforce foreign key

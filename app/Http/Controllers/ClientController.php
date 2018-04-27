@@ -32,22 +32,37 @@ class ClientController extends Controller
     {
         if (Auth::user()->role === 'doctor') {
             $request->validate([
-                'medical_license_no' => 'nullable|string|size:10|unique:doctors,medical_license_no'
+                'work_day' => 'required|boolean',
+                'weekday' => 'required_if:work_day,1',
+                'start_hour' => 'required|numeric',
+                'end_hour' => 'required|numeric',
+                'medical_license_no' => ['required', 'string', 'size:10', Rule::unique
+                ('doctors')->ignore(Auth::user()->doctor->id)]
             ]);
         }
         $request->validate([
-            'firstname' => 'nullable|alpha',
-            'lastname' => 'nullable|alpha',
-            'id_no' => 'nullable|numeric|digits:13|unique:clients,id_no',
-            'tel_no' => 'nullable|numeric|digits:10|unique:clients,tel_no',
+            'firstname' => 'required|alpha',
+            'lastname' => 'required|alpha',
+            'id_no' => ['required', 'numeric', 'digits:13', Rule::unique
+            ('clients')->ignore(Auth::user()->client->id)],
+            'tel_no' => ['required', 'numeric', 'digits:10', Rule::unique
+            ('clients')->ignore(Auth::user()->client->id)],
             'gender' => ['required', Rule::in(['m', 'f'])],
-            'weight' => 'nullable|numeric|digits:3',
-            'height' => 'nullable|numeric|digits:3',
+            'weight' => 'required|numeric|digits:3',
+            'height' => 'required|numeric|digits:3',
             'blood_type' => ['required', Rule::in(['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'])],
             'intolerances' => 'nullable|string',
             'health_conditions' => 'nullable|string',
         ]);
         if (Auth::user()->role === 'doctor') {
+            Auth::user()->doctor->medical_license_no = $request->input('medical_license_no');
+            Auth::user()->doctor->work_day = $request->input('work_day');
+            if ($request->input('work_day')) {
+                Auth::user()->doctor->weekday = json_encode($request->input('weekday'));
+            } else {
+                Auth::user()->doctor->weekday = null;
+            }
+            Auth::user()->doctor->start_hour = $request->input('start_hour');
             Auth::user()->doctor->medical_license_no = $request->input('medical_license_no');
             Auth::user()->doctor->save();
         }

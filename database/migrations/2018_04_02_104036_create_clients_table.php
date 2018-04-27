@@ -17,14 +17,14 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             //refer to User
             $table->unsignedInteger('user_id');
-            $table->string('firstname')->nullable();
-            $table->string('lastname')->nullable();
-            $table->string('id_no', 13)->nullable();
-            $table->string('tel_no', 10)->nullable();
-            $table->enum('gender', ['m','f'])->nullable();
-            $table->unsignedInteger('weight')->nullable();
-            $table->unsignedInteger('height')->nullable();
-            $table->enum('blood_type', ['A+','A-','B+','B-','O+','O-','AB+','AB-'])->nullable();
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('id_no', 13);
+            $table->string('tel_no', 10);
+            $table->enum('gender', ['m','f']);
+            $table->unsignedInteger('weight');
+            $table->unsignedInteger('height');
+            $table->enum('blood_type', ['A+','A-','B+','B-','O+','O-','AB+','AB-']);
             $table->text('intolerances')->nullable();
             $table->text('health_conditions')->nullable();
             $table->timestamps();

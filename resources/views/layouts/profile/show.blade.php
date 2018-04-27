@@ -105,6 +105,31 @@
         @if(Auth::user()->doctor)
             <hr class="mb-4">
             <div class="row">
+                <div class="col-md-6 mb-3">
+                    <strong class="col-3">Work Days</strong>
+                    <div class="col-12">
+                        @php
+                            $weekday = json_decode(Auth::user()->doctor->weekday);
+                            $displayWeekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+                        @endphp
+                        @if(!Auth::user()->doctor->work_day || count($weekday) === 5)
+                            Whole Weekdays
+                        @else
+                            |
+                            @foreach($weekday as $index)
+                                {{ $displayWeekday[$index-1] }} |
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <strong class="col-3">Work Hours</strong>
+                    <div class="col-12">
+                        {{ 'From'.Auth::user()->doctor->start_hour.' to '.Auth::user()->doctor->end_hour }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-12 mb-3">
                     <strong class="col-3">Medical License:</strong>
                     <div class="col-12">
