@@ -70,13 +70,27 @@ Now, you should be able to open any prefered-browser, type ```<prefered-name>.te
 *Permanent-solution*: consult Google :DDD
 
 ## App Info
+### Pre-generated Data:
+
+  - Accessing as Admin
+  
+    >Username = admin, Password = admin
+    
+  - Accessing as Client
+  
+    >Username = client, Password = client
+    
+  - Accessing as Doctor
+  
+    >Username = doctor, Password = doctor
 
 ### Authors
-* Thanpong Supalak - 5810405029
+* นายวุฒิเดช เดชมูล - 5810401040
+* นายธนณาพงศ์ ศุภลักษณ์ - 5810405029
 <a href="mailto:thanapong.su@ku.th?Subject=Regarding%20Laravel%20Project" target="_blank">Contact</a>
-*
-*
-*
+* น.ส.วีรสิริ ศุภชัยศิริเรือง - 5810405363
+* น.ส.ธนัชพร พิษณุพจน์ - 5810405053
+* นายชัชวัสส์ พิธานพิทยารัตน์ - 5710400521
 
 
 
