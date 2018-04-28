@@ -31,6 +31,7 @@ Route::group(
     function () {
         Route::get('dashboard', 'DoctorController@index')
             ->name('doctor.dashboard');
+        Route::get('diagnose/client/{client}', 'DoctorController@showDiagnosis')->name('doctor.diagnose');
     }
 );
 

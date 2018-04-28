@@ -2,6 +2,10 @@
 
 @section('title', 'ADMIN')
 
+@section('navbar')
+    @include('admin.inc.navbar')
+@stop
+
 @section('content')
     <div class="container-fluid">
         <main>

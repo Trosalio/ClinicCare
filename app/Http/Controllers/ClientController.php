@@ -34,8 +34,8 @@ class ClientController extends Controller
             $request->validate([
                 'work_day' => 'required|boolean',
                 'weekday' => 'required_if:work_day,1',
-                'start_hour' => 'required|numeric',
-                'end_hour' => 'required|numeric',
+                'start_hour' => 'required|numeric|between:9,16',
+                'end_hour' => 'required|numeric|between:10,17',
                 'medical_license_no' => ['required', 'string', 'size:10', Rule::unique
                 ('doctors')->ignore(Auth::user()->doctor->id)]
             ]);
@@ -48,8 +48,8 @@ class ClientController extends Controller
             'tel_no' => ['required', 'numeric', 'digits:10', Rule::unique
             ('clients')->ignore(Auth::user()->client->id)],
             'gender' => ['required', Rule::in(['m', 'f'])],
-            'weight' => 'required|numeric|digits:3',
-            'height' => 'required|numeric|digits:3',
+            'weight' => 'required|numeric|between:1,500',
+            'height' => 'required|numeric|between:20,300',
             'blood_type' => ['required', Rule::in(['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'])],
             'intolerances' => 'nullable|string',
             'health_conditions' => 'nullable|string',
