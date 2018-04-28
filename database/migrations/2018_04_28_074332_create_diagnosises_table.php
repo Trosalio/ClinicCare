@@ -13,11 +13,11 @@ class CreateDiagnosisesTable extends Migration
      */
     public function up()
     {
-        Schema::create('diagnosises', function (Blueprint $table) {
+        Schema::create('diagnoses', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedinteger('doctor_id');
             $table->unsignedinteger('client_id');
-            $table->string('opinion');
+            $table->text('opinion');
             $table->timestamps();
 
             $table->foreign('doctor_id')
