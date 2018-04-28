@@ -33,7 +33,7 @@ Route::group(
             ->name('doctor.dashboard');
         Route::get('diagnose/client/{client}', 'DoctorController@showDiagnosis')->name('doctor.diagnose');
         Route::get('diagnosis/show', 'DoctorController@showDiagnosis')
-        ->name('doctor.show');
+            ->name('doctor.show');
     }
 );
 

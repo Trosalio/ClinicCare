@@ -1,4 +1,8 @@
 @extends('layouts.master')
+@section('title', 'Medical Diagnosis' )
+@section('navbar')
+    @include('doctor.inc.navbar')
+@stop
 @section('content')
     <h1>Medical Diagnosis</h1>
     <hr/>
