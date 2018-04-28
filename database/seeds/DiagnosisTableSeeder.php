@@ -11,6 +11,6 @@ class DiagnosisTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Diagnosis::class, 10)->create();
     }
 }

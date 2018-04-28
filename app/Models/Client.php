@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
 use App\User;
+use App\Diagnosis;
 
 class Client extends Model
 {
