@@ -21,6 +21,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('doctor.showpatient') }}"  class="nav-link">
+                    <i class="fas fa-list-ul"></i>
+                    <span class="nav-link-text">My patient</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="" class="nav-link">
                     <i class="fas fa-plus-circle"></i>
                     <span class="nav-link-text">DDD</span>
