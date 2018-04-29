@@ -14,6 +14,10 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+        // delete pre-existing data
+        DB::table('clients')->delete();
+        DB::table('doctors')->delete();
+        DB::table('users')->delete();
         // create admin
         $user_admin = new User();
         $user_admin->username = 'admin';

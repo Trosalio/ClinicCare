@@ -15,20 +15,20 @@ class CreateDiagnosisesTable extends Migration
     {
         Schema::create('diagnoses', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedinteger('doctor_id');
-            $table->unsignedinteger('client_id');
+            $table->unsignedInteger('appointment_id');
+            $table->unsignedInteger('doctor_id');
             $table->text('opinion');
             $table->text('medicine');
             $table->timestamps();
 
+
+            $table->foreign('appointment_id')
+                ->references('id')
+                ->on('appointments')
+                ->onDelete('cascade');
             $table->foreign('doctor_id')
                 ->references('id')
                 ->on('doctors')
-                ->onDelete('cascade');
-
-            $table->foreign('client_id')
-                ->references('id')
-                ->on('clients')
                 ->onDelete('cascade');
         });
     }
@@ -40,6 +40,6 @@ class CreateDiagnosisesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('diagnosises');
+        Schema::dropIfExists('diagnoses');
     }
 }

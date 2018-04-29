@@ -19,19 +19,19 @@
             </tr>
             </thead>
 
-            @foreach($diagnoses as $diag)
+            @foreach($diagnoses as $diagnose)
             <tbody>
-                <tr>
+                <tr onclick="window.location.assign('{{ route('doctor.editDiagnosis', ['diagnose' => $diagnose]) }}')">
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $diag->created_at }}</td>
-                    <td>{{ App\Models\Client::findOrNew($diag->client_id)->firstname }}</td>
-                    <td>{{ App\Models\Client::findOrNew($diag->client_id)->lastname }}</td>
-                    <td>{{ $diag->medicine }}</td>
-                    <td>{{ $diag->opinion }}</td>
+                    <td>{{ $diagnose->created_at }}</td>
+                    <td>{{ $diagnose->appointment->client->firstname }}</td>
+                    <td>{{ $diagnose->appointment->client->lastname }}</td>
+                    <td>{{ $diagnose->medicine }}</td>
+                    <td>{{ $diagnose->opinion }}</td>
                 </tr>
             @endforeach
             </tbody>
-            
+
         </table>
     </div>
     @stop
