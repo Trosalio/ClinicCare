@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Diagnosis extends Model
 {
-    public function client()
+    public function appointment()
     {
-        return $this->belongsTo('App\Models\Client' ,'client_id');
+        return $this->belongsTo(Appointment::class, 'appointment_id');
     }
+
     public function doctor()
     {
-        return $this->belongsTo('App\Models\Doctor' ,'doctor_id');
+        return $this->belongsTo(Models\Doctor::class, 'doctor_id');
     }
 }

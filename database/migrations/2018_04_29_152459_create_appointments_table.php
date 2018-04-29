@@ -20,10 +20,9 @@ class CreateAppointmentsTable extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->tinyInteger('status');
-            $table->timestamps();
-
             $table->unsignedInteger('client_id');
             $table->unsignedInteger('doctor_id');
+            $table->timestamps();
 
             $table->foreign('doctor_id')
                 ->references('id')
@@ -45,6 +44,7 @@ class CreateAppointmentsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('diagnoses');
         Schema::dropIfExists('appointments');
     }
 }

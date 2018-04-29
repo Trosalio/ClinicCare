@@ -32,13 +32,15 @@ Route::group(
         Route::get('dashboard', 'DoctorController@index')
             ->name('doctor.dashboard');
         Route::get('diagnose/client/{client}', 'DoctorController@showDiagnosis')->name('doctor.diagnose');
-        Route::get('diagnosis/show', 'DoctorController@showDiagnosis')
+        Route::get('diagnose/show', 'DoctorController@showDiagnosis')
             ->name('doctor.show');
         Route::get('patient', 'DoctorController@showAllPatient')
             ->name('doctor.showpatient');
-        Route::get('diagnose/create', 'DoctorController@createDiagnosis')
+        Route::post('diagnose/show', 'DoctorController@storeDiagnosis')
+            ->name('doctor.storeDiagnosis');
+        Route::get('diagnose/{appointment}/create', 'DoctorController@createDiagnosis')
             ->name('doctor.createDiagnosis');
-        Route::get('diagnose/edit', 'DoctorController@editDiagnosis')
+        Route::get('diagnose/{diagnose}/edit', 'DoctorController@editDiagnosis')
             ->name('doctor.editDiagnosis');
     }
 );

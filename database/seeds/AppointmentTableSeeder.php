@@ -11,6 +11,19 @@ class AppointmentTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Appointment::class, 10)->create();
+        // delete pre-existing data
+        DB::table('diagnoses')->delete();
+        DB::table('appointments')->delete();
+
+        factory(\App\Appointment::class, 30)->create()->each(function ($appointment) {
+            if($appointment->save()){
+                if($appointment->status === 1){
+                    $diagnose = factory(\App\Diagnosis::class)->make();
+                    $diagnose->appointment()->associate($appointment);
+                    $diagnose->doctor()->associate($appointment->doctor);
+                    $diagnose->save();
+                }
+            }
+        });
     }
 }
