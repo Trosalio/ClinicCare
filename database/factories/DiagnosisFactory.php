@@ -9,6 +9,7 @@ $factory->define(App\Diagnosis::class, function (Faker $faker) {
     
         'doctor_id' => $faker->randomElement($doctor_ids),
         'client_id' => $faker->randomElement($client_ids),
-        'opinion' => $faker->realText()
+        'opinion' => $faker->realText(),
+        'medicine' => $faker->realText()
     ];
 });

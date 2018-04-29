@@ -73,8 +73,8 @@ class UserController extends Controller
             $request->validate([
                 'work_day' => 'required|boolean',
                 'weekday' => 'required_if:work_day,1',
-                'start_hour' => 'required|numeric',
-                'end_hour' => 'required|numeric',
+                'start_hour' => 'required|numeric|between:9,16',
+                'end_hour' => 'required|numeric|between:10,17',
                 'medical_license_no' => 'required|string|size:10|unique:doctors,medical_license_no'
             ]);
         }
@@ -84,8 +84,8 @@ class UserController extends Controller
             'id_no' => 'required|numeric|digits:13|unique:clients,id_no',
             'tel_no' => 'required|numeric|digits:10|unique:clients,tel_no',
             'gender' => ['required', Rule::in(UserController::$gender)],
-            'weight' => 'required|numeric|digits:3',
-            'height' => 'required|numeric|digits:3',
+            'weight' => 'required|numeric|between:1,500',
+            'height' => 'required|numeric|between:20,300',
             'blood_type' => ['required', Rule::in(UserController::$blood_types)],
             'intolerances' => 'nullable|string',
             'health_conditions' => 'nullable|string',

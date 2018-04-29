@@ -21,4 +21,19 @@ class DoctorController extends Controller
     {
         return view('profile');
     }
+
+    public function showDiagnosis()
+    {
+        $id = \App\Models\Doctor::where('user_id',auth()->user()->id)->first()->id;
+        $diagnoses = \App\Diagnosis::where('doctor_id',$id)->get();
+        return view('doctor/diagnosis/show',['diagnoses'=>$diagnoses]);
+        // return view('doctor/diagnosis/show');
+    }
+
+    public function showAllPatient()
+    {
+        $id = \App\Models\Doctor::where('user_id',auth()->user()->id)->first()->id; //id doctor
+        $patient = \App\Diagnosis::where('doctor_id',$id)->get();
+        return view('doctor/patient',['diagnoses'=>$patient]);
+    }
 }

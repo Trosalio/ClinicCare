@@ -12,18 +12,16 @@
 
     <div class="collapse navbar-collapse" id="navbarResponsive">
         @auth
-        <ul class="navbar-nav navbar-sidenav" id="accordion">
-                @if(Auth::user()->isAdmin())
-                    @include('admin.inc.navbar')
-                @endif
-        </ul>
-        <ul class="navbar-nav sidenav-toggler">
-            <li class="nav-item">
-                <a class="nav-link text-center" id="sidenavToggler">
-                    <i class="fas fa-angle-left"></i>
-                </a>
-            </li>
-        </ul>
+            <ul class="navbar-nav navbar-sidenav" id="accordion">
+                @yield('nav-sidebar')
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
         @endauth
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
