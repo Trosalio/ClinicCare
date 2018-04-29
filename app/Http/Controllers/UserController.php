@@ -35,7 +35,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.dashboard')->with('users', $users);
+        $status = null;
+        if (session('success')) {
+            $status = session('success');
+        }
+        return view('admin.dashboard')
+            ->with('users', $users)
+            ->with('status', $status);
     }
 
     /**
@@ -69,7 +75,7 @@ class UserController extends Controller
             'role' => ['required', Rule::in(UserController::$roles)],
         ]);
 
-        if($request->input('role') === 'doctor'){
+        if ($request->input('role') === 'doctor') {
             $request->validate([
                 'work_day' => 'required|boolean',
                 'weekday' => 'required_if:work_day,1',
@@ -101,7 +107,7 @@ class UserController extends Controller
                 $doctor = new Doctor;
                 $doctor->medical_license_no = $request->input('medical_license_no');
                 $doctor->work_day = $request->input('work_day');
-                if($request->input('work_day')){
+                if ($request->input('work_day')) {
                     $doctor->weekday = json_encode($request->input('weekday'));
                 } else {
                     $doctor->weekday = null;
@@ -126,7 +132,7 @@ class UserController extends Controller
             $client->user()->associate($user);
             $client->save();
         };
-        return redirect()->route('users.show', ['user' => $user]);
+        return redirect()->route('users.show', ['user' => $user])->with('success', 'User:' . $user->username . ' was created!');
     }
 
     /**
@@ -138,7 +144,13 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show')->with('user', $user);
+        $status = null;
+        if (session('success')) {
+            $status = session('success');
+        }
+        return view('admin.users.show')
+            ->with('user', $user)
+            ->with('status', $status);
     }
 
     /**
@@ -183,7 +195,7 @@ class UserController extends Controller
                 $user->doctor->delete();
             }
         }
-        return redirect()->route('users.show', ['user' => $user]);
+        return redirect()->route('users.show', ['user' => $user])->with('success', 'User: ' . $user->username . ' has been updated!');
     }
 
     /**
@@ -195,8 +207,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $username = $user->username;
         $user->delete();
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'User: ' . $username . ' was deleted!');
     }
 
     public function savePDF()

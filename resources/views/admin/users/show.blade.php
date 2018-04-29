@@ -5,6 +5,11 @@
 @stop
 
 @section('content')
+    @if ($status)
+        <div class="alert alert-success">
+            {{ $status }}
+        </div>
+    @endif
     <h1>Profile: {{ ucfirst($user->username) }}</h1>
     <a href="{{ route('users.index') }}"><i class="fas fa-arrow-left"></i> Back to User List</a>
     <hr class="mb-4">
