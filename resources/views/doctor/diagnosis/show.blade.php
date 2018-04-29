@@ -14,6 +14,7 @@
                 <th>Date</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
+                <th>Medicine</th>
                 <th>Opinion</th>
             </tr>
             </thead>
@@ -25,6 +26,7 @@
                     <td>{{ $diag->created_at }}</td>
                     <td>{{ App\Models\Client::findOrNew($diag->client_id)->firstname }}</td>
                     <td>{{ App\Models\Client::findOrNew($diag->client_id)->lastname }}</td>
+                    <td>{{ $diag->medicine }}</td>
                     <td>{{ $diag->opinion }}</td>
                 </tr>
             @endforeach

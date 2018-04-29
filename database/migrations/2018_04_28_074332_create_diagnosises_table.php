@@ -18,6 +18,7 @@ class CreateDiagnosisesTable extends Migration
             $table->unsignedinteger('doctor_id');
             $table->unsignedinteger('client_id');
             $table->text('opinion');
+            $table->text('medicine');
             $table->timestamps();
 
             $table->foreign('doctor_id')
