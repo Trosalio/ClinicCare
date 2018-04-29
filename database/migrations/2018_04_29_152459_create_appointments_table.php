@@ -45,6 +45,12 @@ class CreateAppointmentsTable extends Migration
      */
     public function down()
     {
+        Schema::enableForeignKeyConstraints();
+        Schema::table('appointments', function(Blueprint $table) {
+            $table->dropForeign(['doctor_id']);
+            $table->dropForeign(['client_id']);
+        });
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('appointments');
     }
 }
