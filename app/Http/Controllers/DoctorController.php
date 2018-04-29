@@ -45,7 +45,19 @@ class DoctorController extends Controller
         }
         // print_r($client_ids) ;
         return view('doctor/patient',['clients'=>$clients]);
-        
+
         // return view('doctor/patient',['diagnoses'=>$diagnoses]);
+    }
+    public function createDiagnosis(User $user)
+    {
+        $id = \App\Models\Client::where('user_id',auth()->user()->id)->first()->id;
+        $diagnoses = \App\Diagnosis::where('doctor_id',$id)->get();
+        return view('doctor/diagnosis/create',['diagnoses'=>$diagnoses])
+                ->with('user', $user);
+    }
+    public function editDiagnosis(Diagnose $diag)
+    {
+        return view('doctor/diagnosis/edit')
+              ->with('diagnosis',$diag);
     }
 }

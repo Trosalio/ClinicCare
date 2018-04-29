@@ -21,7 +21,7 @@
 
             @foreach($diagnoses as $diag)
             <tbody>
-                <tr>
+                <tr onclick="window.location.assign('{{ route('doctor.editDiagnosis', [$diag]) }}')">
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $diag->created_at }}</td>
                     <td>{{ App\Models\Client::findOrNew($diag->client_id)->firstname }}</td>
@@ -31,7 +31,7 @@
                 </tr>
             @endforeach
             </tbody>
-            
+
         </table>
     </div>
     @stop

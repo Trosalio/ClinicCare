@@ -36,6 +36,10 @@ Route::group(
             ->name('doctor.show');
         Route::get('patient', 'DoctorController@showAllPatient')
             ->name('doctor.showpatient');
+        Route::get('diagnose/create', 'DoctorController@createDiagnosis')
+            ->name('doctor.createDiagnosis');
+        Route::get('diagnose/edit', 'DoctorController@editDiagnosis')
+            ->name('doctor.editDiagnosis');
     }
 );
 
