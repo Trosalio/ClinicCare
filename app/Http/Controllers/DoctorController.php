@@ -14,7 +14,9 @@ class DoctorController extends Controller
      */
     public function index(Request $request)
     {
-        return view('doctor.dashboard');
+        $id = \App\Models\Doctor::where('user_id',auth()->user()->id)->first()->id;
+        $appointments = \App\Appointment::where('doctor_id', $id)->get();
+        return view('doctor.dashboard',['appointments'=>$appointments]);
     }
 
     public function profile()
@@ -48,12 +50,9 @@ class DoctorController extends Controller
 
         // return view('doctor/patient',['diagnoses'=>$diagnoses]);
     }
-    public function createDiagnosis(User $user)
+    public function createDiagnosis()
     {
-        $id = \App\Models\Client::where('user_id',auth()->user()->id)->first()->id;
-        $diagnoses = \App\Diagnosis::where('doctor_id',$id)->get();
-        return view('doctor/diagnosis/create',['diagnoses'=>$diagnoses])
-                ->with('user', $user);
+        return view('doctor/diagnosis/create');
     }
     public function editDiagnosis(Diagnose $diag)
     {
