@@ -13,11 +13,22 @@
                 <th>#</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
+                <th>Blood type</th>
+                <th>Telephone No.</th>
             </tr>
             </thead>
-            {{ $diagnoses}}
-            <tbody>
-            </tbody>
+            @foreach($clients as $client)
+                <tbody>
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{$client->firstname}}</td>
+                        <td>{{$client->lastname}}</td>
+                        <td>{{$client->blood_type}}</td>
+                        <td>{{$client->tel_no}}</td>
+                    </tr>
+
+                </tbody>
+            @endforeach
             
         </table>
     </div>
