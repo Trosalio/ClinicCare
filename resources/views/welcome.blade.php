@@ -90,6 +90,7 @@
                 </div>
 
                 <div class="links">
+                    <a href="{{ url('schedule') }}">Schedule</a>
                     <a href="{{ Route('users.api') }}">Users Data</a>
                     <a href="https://github.com/Trosalio/laravel-project#laravel-project">GitHub</a>
                 </div>

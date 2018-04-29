@@ -43,3 +43,8 @@ Route::group(
         Route::get('pdf', 'UserController@savePDF')->name('users.savePDF');
     }
 );
+
+// Routes schedule page
+Route::get('/schedule', function(){
+    return view('schedule');
+});
