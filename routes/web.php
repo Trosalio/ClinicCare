@@ -56,5 +56,8 @@ Route::group(
 );
 
 // Routes schedule page
-Route::get('/schedule', 'AppointmentController@index');
-Route::post('/schedule', 'AppointmentController@addApp');
+Route::get('/schedule', 'ScheduleController@index');
+Route::post('/schedule', 'ScheduleController@addApp');
+
+// Routs appointment page
+// Route::get('/appointment', )
