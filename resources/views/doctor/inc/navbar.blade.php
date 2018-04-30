@@ -9,15 +9,15 @@
         </a>
         <ul class="sidenav-second-level collapse" id="collapseUsers">
             <li class="nav-item">
-                <a href="{{ url('schedule') }}"  class="nav-link">
-                    <i class="fas fa-list-ul"></i>
-                    <span class="nav-link-text">Schedule</span>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a href="{{ route('doctor.dashboard') }}"  class="nav-link">
                     <i class="fas fa-list-ul"></i>
                     <span class="nav-link-text">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('schedule') }}"  class="nav-link">
+                    <i class="fas fa-list-ul"></i>
+                    <span class="nav-link-text">Schedule</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -29,15 +29,15 @@
             <li class="nav-item">
                 <a href="{{ route('doctor.showpatient') }}"  class="nav-link">
                     <i class="fas fa-list-ul"></i>
-                    <span class="nav-link-text">My patient</span>
+                    <span class="nav-link-text">My Patient</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="" class="nav-link">
                     <i class="fas fa-plus-circle"></i>
                     <span class="nav-link-text">DDD</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </li>
 @stop

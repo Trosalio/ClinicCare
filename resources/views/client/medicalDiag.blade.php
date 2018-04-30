@@ -21,8 +21,8 @@
                 <tbody>
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{$diag->client->firstname}}</td>
-                        <td>{{$diag->client->lastname}}</td>
+                        <td>{{$diag->appointment->client->firstname}}</td>
+                        <td>{{$diag->appointment->client->lastname}}</td>
                         <td>{{$diag->medicine}}</td>
                         <td>{{$diag->opinion}}</td>
                        

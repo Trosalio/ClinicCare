@@ -87,15 +87,13 @@ class ClientController extends Controller
 
     public function showDiagnosis()
     {   
-        $diagnoses = \App\Diagnosis::where('client_id', Auth::user()->client->id)->get();
+        $list = \App\Diagnosis::get();
+        $diagnoses = [];
+        foreach ($list as $diag) {
+            if ($diag->appointment->client->id == Auth::user()->client->id) {
+                array_push($diagnoses, $diag);
+            }
+        }
         return view('client/medicalDiag', ['diagnoses' => $diagnoses]);
-        // return $diagnoses;
-        // $appointments = App\Appointment::where('client_id', Auth::user()->client->id)->get();
-        // print_r($appointments);
-        // $diagnoses = Diagnosis::all();
-        // foreach ($diagnoses as $diag) {
-            // diag
-        // }
-        // return view('client/medicalDiag', ['diagnoses' => $diagnoses]);
     }
 }

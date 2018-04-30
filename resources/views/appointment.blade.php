@@ -121,7 +121,11 @@
                         Intolerances:
                     </div>
                     <div class="col-xl-8 col-md-8 col-sm-8">
-                        {{$app->client->intolerances}}
+                         @if ($app->client->intolerances == null)
+                            -
+                        @else
+                            {{$app->client->intolerances}}
+                        @endif
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4 font-weight-bold">
                         Health Conditions:
@@ -184,7 +188,7 @@
                                 Declined
                             @endif
                         </div>
-                        @if(Auth::user()->doctor->id === $app->doctor->id)
+                        @if(Auth::user()->role === 'doctor')
                             <div class="col-xl-3 col-md-3 col-sm-3 text-center sep"></div>
                             <div class="col-xl-2 col-md-2 col-sm-2">
                                 <input type="submit" value="Accept" name="submit" class="btn btn-success"/>
@@ -197,7 +201,7 @@
                                 target="_blank">Save as PDF</a>
                             </div>
                             <div class="col-xl-3 col-md-3 col-sm-3 sep"></div>
-                        @else
+                        @elseif (Auth::user()->role === 'client' and $app->status == 1)
                             <div class="col-sm-2 offset-sm-5 text-left">
                                 <a class="btn btn-info" href="{{ route('appointment.savePDF', ['app' => $app]) }}"
                                    target="_blank">Save as PDF</a>

@@ -45,7 +45,7 @@
   </div>
   <a type="button" class="btn btn-primary" href="{{ route('diagnosis.savePDF',[$diagnose]) }}" target="_blank">Save to PDF</a>
   <input type="submit" class="btn btn-success" value="Save">
-  <a type="button" class="btn btn-danger" href="{{ route('doctor.dashboard') }}">Cancel</a>
+  <a type="button" class="btn btn-danger" href="{{ route('doctor.show') }}">Cancel</a>
 </form>
   </div>
 

@@ -12,6 +12,7 @@
                     {{ session('status') }}
                 </div>
             @endif
+            <h1>Appointment</h1>
             <div class="table-responsive">
                 <table id="diagnosis-table" class="table table-hover">
                     <thead>

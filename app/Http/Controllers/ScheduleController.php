@@ -48,6 +48,13 @@ class ScheduleController extends Controller
                 }
             } elseif (Auth::check() and Auth::user()->role === 'client') {
                 if ($app->status == 1 or $app->client->id == Auth::user()->client->id) {
+                    $url = '';
+                    if ($app->client->id == Auth::user()->client->id) {
+                        $url = '/appointment/'.$app->id;
+                    }
+                    if ($app->status == 1 and $app->client->id == Auth::user()->client->id) {
+                        $color = '#29a329';
+                    }
                     $app_list[] = Calendar::event(
                         $app->client->firstname,
                         false,
@@ -57,6 +64,7 @@ class ScheduleController extends Controller
                         [
                             'textColor' => '#000000',
                             'color' => $color,
+                            'url' => $url
                         ]
                     );
                 }

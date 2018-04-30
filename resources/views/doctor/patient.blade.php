@@ -25,7 +25,11 @@
                         <td>{{$client->firstname}}</td>
                         <td>{{$client->lastname}}</td>
                         <td>{{$client->blood_type}}</td>
+                        @if ($client->intolerances != null)
                         <td>{{$client->intolerances}}</td>
+                        @else
+                        <td>-</td>
+                        @endif
                         <td>{{$client->tel_no}}</td>
                     </tr>
 
