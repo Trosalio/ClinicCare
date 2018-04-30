@@ -83,4 +83,19 @@ class ClientController extends Controller
         Auth::user()->client->save();
         return redirect()->route('profile')->with('success', "User: " . Auth::user()->username . "'s profile has been updated!");
     }
+
+    public function showDiagnosis()
+    {   
+        echo Auth::user()->client->id;
+        $diagnoses = \App\Diagnosis::where('client_id', Auth::user()->client->id)->get();
+        return view('client/medicalDiag', ['diagnoses' => $diagnoses]);
+        // return $diagnoses;
+        // $appointments = App\Appointment::where('client_id', Auth::user()->client->id)->get();
+        // print_r($appointments);
+        // $diagnoses = Diagnosis::all();
+        // foreach ($diagnoses as $diag) {
+            // diag
+        // }
+        // return view('client/medicalDiag', ['diagnoses' => $diagnoses]);
+    }
 }
