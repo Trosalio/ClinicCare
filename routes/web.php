@@ -65,4 +65,5 @@ Route::post('/schedule', 'ScheduleController@addApp');
 
 // Routs appointment page
 Route::get('/appointment/{id}', 'AppointmentController@index');
+Route::get('/appointment/{id}/pdf', 'AppointmentController@savePDF')->name('appointment.savePDF');
 Route::post('/appointment/{app}', 'AppointmentController@statusUpdate');
