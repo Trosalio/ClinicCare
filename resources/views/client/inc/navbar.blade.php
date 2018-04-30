@@ -11,7 +11,7 @@
             <li class="nav-item">
                 <a href="" class="nav-link">
                     <i class="fas fa-list-ul"></i>
-                    <span class="nav-link-text">CC</span>
+                    <span class="nav-link-text">Medical Diagnosis</span>
                 </a>
             </li>
             <li class="nav-item">
