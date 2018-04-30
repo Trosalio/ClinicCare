@@ -18,14 +18,7 @@
                 <input type="text" readonly class="form-control-plaintext" id="patientLastname" value="{{$appointment->client->lastname}}">
               </div>
             </div>
-            <div class="form-group row">
-              <label for="age" class="col-sm-2 col-form-label">Age</label>
-              <div class="col-xs-6">
-                <input type="text" readonly class="form-control-plaintext" id="patientAge" value="{{$appointment->client->age}}">
-              </div>
-              <label  class="col-xs-2 col-form-label">years old</label>
 
-            </div>
             <div class="form-group row">
               <label for="congenitalDisease" class="col-sm-2 col-form-label">Congenital disease</label>
               <div class="col-xs-10">
