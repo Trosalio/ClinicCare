@@ -35,9 +35,14 @@ class DoctorController extends Controller
     public function showAllPatient()
     {
         $diagnoses = Diagnosis::where('doctor_id', Auth::user()->doctor->id)->get();
+        $client_ids = array();
+        foreach($diagnoses as $diag){
+            array_push($client_ids, $diag->client->id);
+        }
+        $client_ids = array_unique($client_ids);
         $clients = array();
-        foreach ($diagnoses as $diag) {
-            array_push($clients, $diag->appointment->client);
+        foreach($client_ids as $id){
+            array_push($clients, \App\Models\Client::where('id',$id)->first());
         }
         // print_r($clients) ;
         return view('doctor/patient', ['clients' => $clients]);
