@@ -20,7 +20,11 @@ class ClientController extends Controller
 
     public function profile()
     {
-        return view('layouts.profile.show');
+        $status = null;
+        if (session('success')) {
+            $status = session('success');
+        }
+        return view('layouts.profile.show')->with('status', $status);
     }
 
     public function edit()
@@ -77,6 +81,6 @@ class ClientController extends Controller
         Auth::user()->client->intolerances = $request->input('intolerances');
         Auth::user()->client->health_conditions = $request->input('health_conditions');
         Auth::user()->client->save();
-        return redirect()->route('profile');
+        return redirect()->route('profile')->with('success', "User: " . Auth::user()->username . "'s profile has been updated!");
     }
 }

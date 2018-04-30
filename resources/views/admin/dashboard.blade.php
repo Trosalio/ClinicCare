@@ -8,6 +8,11 @@
 
 @section('content')
     <div class="container-fluid">
+        @if ($status)
+            <div class="alert alert-success">
+                {{ $status }}
+            </div>
+        @endif
         <main>
             @include('admin.users.reports')
         </main>

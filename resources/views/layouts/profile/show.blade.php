@@ -3,6 +3,11 @@
 @section('title', Auth::user()->username )
 
 @section('content')
+    @if ($status)
+        <div class="alert alert-success">
+            {{ $status }}
+        </div>
+    @endif
     <h1>Profile: {{ ucfirst(Auth::user()->username) }}</h1>
     <a href="{{ route('profile.edit') }}"><i class="fas fa-wrench"></i> Edit Profile</a>
     <hr class="mb-4">
