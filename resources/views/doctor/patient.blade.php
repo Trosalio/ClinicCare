@@ -14,6 +14,7 @@
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Blood type</th>
+                <th>Intolerance</th>
                 <th>Telephone No.</th>
             </tr>
             </thead>
@@ -24,6 +25,7 @@
                         <td>{{$client->firstname}}</td>
                         <td>{{$client->lastname}}</td>
                         <td>{{$client->blood_type}}</td>
+                        <td>{{$client->intolerances}}</td>
                         <td>{{$client->tel_no}}</td>
                     </tr>
 
