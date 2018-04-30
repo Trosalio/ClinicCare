@@ -19,7 +19,7 @@ class ScheduleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $apps = Appointment::get();
+        $apps = Appointment::all();
         $app_list = [];
         foreach ($apps as $keys => $app) {
             if ($app->status == 0) {

@@ -16,6 +16,7 @@ class CreateDiagnosisesTable extends Migration
         Schema::create('diagnoses', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('appointment_id');
+            $table->unsignedInteger('client_id');
             $table->unsignedInteger('doctor_id');
             $table->text('opinion');
             $table->text('medicine');
@@ -29,6 +30,10 @@ class CreateDiagnosisesTable extends Migration
             $table->foreign('doctor_id')
                 ->references('id')
                 ->on('doctors')
+                ->onDelete('cascade');
+            $table->foreign('client_id')
+                ->references('id')
+                ->on('clients')
                 ->onDelete('cascade');
         });
     }
