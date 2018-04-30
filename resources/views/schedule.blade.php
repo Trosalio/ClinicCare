@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @push ('script')
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
 {!! $calendar_details->script() !!}
@@ -17,7 +16,7 @@
                 font-weight: 100;
                 /* height: 100%; */
                 margin: 0;
-            }
+        }
 
         textarea {
             width: 100%;
@@ -55,14 +54,25 @@
     </style>
 @endpush
 
+@if (Auth::check())
 @section('title', Auth::user()->username )
+@endif
 
-@section('navbar')
-    @include('inc.navbar')
-@stop
+@if (Auth::check())
+    @if (Auth::user()->role === 'client')
+        @section('navbar')
+            @include('client.inc.navbar')
+        @stop
+    @elseif (Auth::user()->role === 'doctor')
+        @section('navbar')
+            @include('doctor.inc.navbar')
+        @stop
+    @endif
+@endif
 
 @section('content')
 <div class="container">
+    @if (Auth::check())
     <div class="panel panel-primary">
         <div class="panel-heading">ยื่นคำร้องขอจองเวลาตรวจ</div>
         <div class="panel-body">
@@ -106,7 +116,7 @@
                             <label for="doctor">Doctor</label>
                             <select name="doctor">
                                 @foreach ($doctors as $doctor)
-                                    <option value="{{ $doctor->id }}">{{ $doctor->user->client->firstname }}</option>
+                                    <option value="{{ $doctor->id }}">Dr.{{ $doctor->user->client->firstname }} {{ $doctor->user->client->lastname }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -120,6 +130,7 @@
             </form>
         </div>
     </div>
+    @endif
     <div class="panel panel-primary">
         <div class="panel-heading">Schedule</div>
         <div class="panel-body" id="calendar_panel">

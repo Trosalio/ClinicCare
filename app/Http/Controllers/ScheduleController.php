@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use lluminate\Support\Facades\Redirect;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Appointment;
 use App\Models\Doctor;
+use Illuminate\Support\Facades\Route;
 
 use Calendar;
 
@@ -21,6 +22,7 @@ class ScheduleController extends Controller
     public function index() {
         $apps = Appointment::all();
         $app_list = [];
+        
         foreach ($apps as $keys => $app) {
             if ($app->status == 0) {
                 $color = '#ffff66';
@@ -29,18 +31,50 @@ class ScheduleController extends Controller
             } else {
                 $color = '#ff4d4d';
             }
-            $app_list[] = Calendar::event(
-                $app->client->firstname,
-                false,
-                new \DateTime($app->start_date),
-                new \DateTime($app->end_date),
-                1,
-                [
-                    'textColor' => '#000000',
-                    'color' => $color,
-                    'url' => '/appointment/'.$app->id
-                ]
-            );
+            if (Auth::check() and Auth::user()->role === 'doctor') {
+                if ($app->doctor->user->client->id == Auth::user()->client->id) {
+                    $app_list[] = Calendar::event(
+                        $app->client->firstname,
+                        false,
+                        new \DateTime($app->start_date),
+                        new \DateTime($app->end_date),
+                        1,
+                        [
+                            'textColor' => '#000000',
+                            'color' => $color,
+                            'url' => '/appointment/'.$app->id
+                        ]
+                    );
+                }
+            } elseif (Auth::check() and Auth::user()->role === 'client') {
+                if ($app->status == 1 or $app->client->id == Auth::user()->client->id) {
+                    $app_list[] = Calendar::event(
+                        $app->client->firstname,
+                        false,
+                        new \DateTime($app->start_date),
+                        new \DateTime($app->end_date),
+                        1,
+                        [
+                            'textColor' => '#000000',
+                            'color' => $color,
+                        ]
+                    );
+                }
+            } else {
+                if ($app->status == 1) {
+                    $app_list[] = Calendar::event(
+                        $app->client->firstname,
+                        false,
+                        new \DateTime($app->start_date),
+                        new \DateTime($app->end_date),
+                        1,
+                        [
+                            'textColor' => '#000000',
+                            'color' => $color,
+                        ]
+                    );
+                }
+            }
         }
         $calendar_details = Calendar::addEvents($app_list);
 

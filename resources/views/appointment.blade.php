@@ -9,7 +9,7 @@
                 font-weight: 100;
                 /* height: 100%; */
                 margin: 0;
-            }
+        }
 
         .panel-heading {
             font-size: 30px;
@@ -47,9 +47,17 @@
 
 @section('title', Auth::user()->username )
 
-@section('navbar')
-    @include('inc.navbar')
-@stop
+@if (Auth::check())
+    @if (Auth::user()->role === 'client')
+        @section('navbar')
+            @include('client.inc.navbar')
+        @stop
+    @elseif (Auth::user()->role === 'doctor')
+        @section('navbar')
+            @include('doctor.inc.navbar')
+        @stop
+    @endif
+@endif
 
 @section('content')
 <div class="container">
@@ -157,6 +165,12 @@
                     </div>
                     <div class="col-xl-8 col-md-8 col-sm-8">
                         {{$app->end_date}}
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4 font-weight-bold">
+                            Doctor:
+                    </div>
+                    <div class="col-xl-8 col-md-8 col-sm-8">
+                        {{$app->doctor->user->client->firstname}} {{$app->doctor->user->client->lastname}}
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4 font-weight-bold">
                         Status:
