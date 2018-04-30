@@ -13,7 +13,7 @@
                 </div>
             @endif
             <div class="table-responsive">
-                <table id="user-table" class="table table-hover">
+                <table id="diagnosis-table" class="table table-hover">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -38,4 +38,22 @@
             </div>
         </div>
     </div>
+    @push('style')
+    <style>
+        tbody tr:hover {
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+    @endpush
+
+    @push('script')
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#diagnosis-table').DataTable();
+        });
+    </script>
+    @endpush
 @stop
