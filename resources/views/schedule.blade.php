@@ -32,16 +32,19 @@
         }
 
         .panel-heading {
+            font-size: 30px;
             background-color: #f8f9fa;
             border: 7px solid;
             border-color: #f8f9fa;
         }
+
         .panel-primary {
             margin-top: 10px;
-            border: 10px solid;
+            border: 15px solid;
             border-radius: 5px;
             border-color: #f8f9fa;
         }
+
         .form-group {
             padding: 7px;
         }

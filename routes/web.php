@@ -60,4 +60,5 @@ Route::get('/schedule', 'ScheduleController@index');
 Route::post('/schedule', 'ScheduleController@addApp');
 
 // Routs appointment page
-// Route::get('/appointment', )
+Route::get('/appointment/{id}', 'AppointmentController@index');
+Route::post('/appointment/{app}', 'AppointmentController@statusUpdate');

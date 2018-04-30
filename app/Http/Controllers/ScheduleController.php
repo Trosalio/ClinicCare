@@ -38,7 +38,7 @@ class ScheduleController extends Controller
                 [
                     'textColor' => '#000000',
                     'color' => $color,
-                    'url' => '/'.$app->id
+                    'url' => '/appointment/'.$app->id
                 ]
             );
         }
