@@ -51,10 +51,30 @@ class DoctorController extends Controller
 
     public function storeDiagnosis(Request $request)
     {
-        return $request;
+      $a = Appointment::where('id',$request['appointment'] )->get();
+      foreach ($a as $b) {
+          $c= $b->client_id;
+      }
+      $request->validate([
+          'diagnosis' => 'required',
+          'medicine' => 'required'
+      ]);
+      $diagnosis = new Diagnosis;
+      $diagnosis->appointment_id = $request['appointment'];
+      $diagnosis->client_id = $c;
+      $diagnosis->doctor_id = Auth::user()->doctor->id;
+      $diagnosis->opinion = $request['diagnosis'];
+      $diagnosis->medicine = $request['medicine'];
+      $diagnosis->save();
+      return redirect('doctor/dashboard');
     }
 
     public function editDiagnosis(Diagnosis $diagnose)
+    {
+        return view('doctor/diagnosis/edit')
+            ->with('diagnose', $diagnose);
+    }
+    public function updateDiagnosis(Request $request, User $user)
     {
         return view('doctor/diagnosis/edit')
             ->with('diagnose', $diagnose);
