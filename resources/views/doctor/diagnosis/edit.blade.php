@@ -4,7 +4,9 @@
 @stop
 @section('content')
   <div class="container">
-    <form>
+    <form method="POST"
+          action="/doctor/diagnose/show/{{ $diagnose->id }}">
+          @csrf
   <div class="form-group row">
     <label for="patientFristname" class="col-sm-2 col-form-label">Firstname</label>
     <div class="col-xs-6">
@@ -38,33 +40,24 @@
   <div class="form-group row">
     <label for="diagnosis" class="col-sm-2 col-form-label">Diagnosis</label>
     <div class="col-xs-6">
-      <textarea class="form-control" id="diagnosis" rows="4" cols="60">{{ $diagnose->opinion }}</textarea>
+      <textarea class="form-control" id="diagnosis" name="opinion" rows="4" cols="60">{{ $diagnose->opinion }}</textarea>
     </div>
   </div>
   <div class="form-group row">
     <label for="medicine" class="col-sm-2 col-form-label">Medicine</label>
     <div class="col-xs-6" id="to-do">
-      <form class="form-inline">
-         <div class="form-group col-xs-6">
-           <input class="form-control" type="text" id ="input" value ="{{ $diagnose->medicine }}">
-         </div>
-         <div class="form-group col-xs-6">
-           <button class="btn btn-primary" id ="add" type="submit">Add Item</button>
-         </div>
-    </form>
-
-      <ul id="list"></ul>
+           <input type="text" class="form-control" id="med" name="medicine" value="{{ $diagnose->medicine }}">
 
   </div>
   </div>
 
-  <button type="button" class="btn btn-primary" href="{{ route('doctor.dashboard') }}">Medical Histories</button>
-  <button type="button" class="btn btn-success" href="{{ route('doctor.dashboard') }}">Save</button>
-  <button type="button" class="btn btn-danger" href="{{ route('doctor.dashboard') }}">Cancel</button>
+  <a type="button" class="btn btn-primary" href="{{ route('doctor.dashboard') }}">Medical Histories</a>
+  <input type="submit" class="btn btn-success" value="Save">
+  <a type="button" class="btn btn-danger" href="{{ route('doctor.dashboard') }}">Cancel</a>
 </form>
   </div>
 
 @endsection
 @push('script')
-    <script src="{{ asset('js/diagnosis-medicine.js') }}"></script>
+    <script src="{{ asset('js/diagnosis-med.js') }}"></script>
 @endpush

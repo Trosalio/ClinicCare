@@ -51,10 +51,12 @@ class DoctorController extends Controller
 
     public function storeDiagnosis(Request $request)
     {
+      // to find client_id
       $a = Appointment::where('id',$request['appointment'] )->get();
       foreach ($a as $b) {
           $c= $b->client_id;
       }
+      //
       $request->validate([
           'diagnosis' => 'required',
           'medicine' => 'required'
@@ -66,6 +68,9 @@ class DoctorController extends Controller
       $diagnosis->opinion = $request['diagnosis'];
       $diagnosis->medicine = $request['medicine'];
       $diagnosis->save();
+
+      //AND want to delete queue in dashboard after create diagnosis
+
       return redirect('doctor/dashboard');
     }
 
@@ -74,9 +79,14 @@ class DoctorController extends Controller
         return view('doctor/diagnosis/edit')
             ->with('diagnose', $diagnose);
     }
-    public function updateDiagnosis(Request $request, User $user)
+    public function updateDiagnosis(Diagnosis $diagnose, Request $request)
     {
-        return view('doctor/diagnosis/edit')
-            ->with('diagnose', $diagnose);
+      $validatedData = $request->validate([
+          'opinion' => 'required',
+          'medicine' => 'required'
+      ]);
+
+      $diagnose->update($validatedData);
+      return redirect('doctor/diagnose/show');
     }
 }

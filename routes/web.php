@@ -43,6 +43,8 @@ Route::group(
             ->name('doctor.createDiagnosis');
         Route::get('diagnose/{diagnose}/edit', 'DoctorController@editDiagnosis')
             ->name('doctor.editDiagnosis');
+        Route::post('diagnose/show/{diagnose}', 'DoctorController@updateDiagnosis')
+            ->name('diagnosis.update');
     }
 );
 
