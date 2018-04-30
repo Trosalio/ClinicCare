@@ -20,6 +20,7 @@ class AppointmentTableSeeder extends Seeder
                 if($appointment->status === 1){
                     $diagnose = factory(\App\Diagnosis::class)->make();
                     $diagnose->appointment()->associate($appointment);
+                    $diagnose->client()->associate($appointment->client);
                     $diagnose->doctor()->associate($appointment->doctor);
                     $diagnose->save();
                 }

@@ -11,6 +11,11 @@ class Diagnosis extends Model
         return $this->belongsTo(Appointment::class, 'appointment_id');
     }
 
+    public function client()
+    {
+        return $this->belongsTo(Models\Client::class, 'client_id');
+    }
+
     public function doctor()
     {
         return $this->belongsTo(Models\Doctor::class, 'doctor_id');

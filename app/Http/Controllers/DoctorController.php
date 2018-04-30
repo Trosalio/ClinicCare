@@ -37,12 +37,10 @@ class DoctorController extends Controller
         $diagnoses = Diagnosis::where('doctor_id', Auth::user()->doctor->id)->get();
         $clients = array();
         foreach ($diagnoses as $diag) {
-            array_push($clients, $diag->client);
+            array_push($clients, $diag->appointment->client);
         }
-        // print_r($client_ids) ;
+        // print_r($clients) ;
         return view('doctor/patient', ['clients' => $clients]);
-
-        // return view('doctor/patient',['diagnoses'=>$diagnoses]);
     }
 
     public function createDiagnosis(Appointment $appointment)

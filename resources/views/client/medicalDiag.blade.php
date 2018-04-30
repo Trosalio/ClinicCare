@@ -1,30 +1,31 @@
 @extends('layouts.master')
 @section('title', 'My Patients' )
 @section('navbar')
-    @include('doctor.inc.navbar')
+    @include('client.inc.navbar')
 @stop
 @section('content')
-    <h1>My patients</h1>
+    <h1>My Medical Diagnosis</h1>
     <hr/>
     <div class="table-responsive">
-        <table id="patient-table" class="table table-hover">
+        <table id="patientDiag-table" class="table table-hover">
             <thead>
             <tr>
                 <th>#</th>
-                <th>Firstname</th>
+                <th>Doctor's Name</th>
                 <th>Lastname</th>
-                <th>Blood type</th>
-                <th>Telephone No.</th>
+                <th>Medicine</th>
+                <th>Opinion</th>
             </tr>
             </thead>
-            @foreach($clients as $client)
+            @foreach($diagnoses as $diag)
                 <tbody>
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{$client->firstname}}</td>
-                        <td>{{$client->lastname}}</td>
-                        <td>{{$client->blood_type}}</td>
-                        <td>{{$client->tel_no}}</td>
+                        <td>{{$diag->client->firstname}}</td>
+                        <td>{{$diag->client->lastname}}</td>
+                        <td>{{$diag->medicine}}</td>
+                        <td>{{$diag->opinion}}</td>
+                       
                     </tr>
 
                 </tbody>
@@ -45,7 +46,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#patient-table').DataTable();
+            $('#patientDiag-table').DataTable();
         });
     </script>
 @endpush

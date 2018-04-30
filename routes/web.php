@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth', 'check_role:client,doctor']], function ()
     Route::get('profile', 'ClientController@profile')->name('profile');
     Route::put('profile', 'ClientController@update')->name('profile.update');
     Route::get('profile/edit', 'ClientController@edit')->name('profile.edit');
+    Route::get('diagnosis', 'ClientController@showDiagnosis')->name('client.show');
 });
 
 // Routes exclusively for doctor
