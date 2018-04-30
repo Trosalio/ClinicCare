@@ -159,6 +159,12 @@
                         {{$app->end_date}}
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4 font-weight-bold">
+                            Doctor:
+                    </div>
+                    <div class="col-xl-8 col-md-8 col-sm-8">
+                        {{$app->doctor->user->client->firstname}} {{$app->doctor->user->client->lastname}}
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4 font-weight-bold">
                         Status:
                     </div>
                     <div class="col-xl-8 col-md-8 col-sm-8">

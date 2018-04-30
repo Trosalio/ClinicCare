@@ -55,7 +55,9 @@
     </style>
 @endpush
 
+@if (Auth::check())
 @section('title', Auth::user()->username )
+@endif
 
 @section('navbar')
     @include('inc.navbar')
@@ -63,6 +65,7 @@
 
 @section('content')
 <div class="container">
+    @if (Auth::check())
     <div class="panel panel-primary">
         <div class="panel-heading">ยื่นคำร้องขอจองเวลาตรวจ</div>
         <div class="panel-body">
@@ -106,7 +109,7 @@
                             <label for="doctor">Doctor</label>
                             <select name="doctor">
                                 @foreach ($doctors as $doctor)
-                                    <option value="{{ $doctor->id }}">{{ $doctor->user->client->firstname }}</option>
+                                    <option value="{{ $doctor->id }}">Dr.{{ $doctor->user->client->firstname }} {{ $doctor->user->client->lastname }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -120,6 +123,7 @@
             </form>
         </div>
     </div>
+    @endif
     <div class="panel panel-primary">
         <div class="panel-heading">Schedule</div>
         <div class="panel-body" id="calendar_panel">

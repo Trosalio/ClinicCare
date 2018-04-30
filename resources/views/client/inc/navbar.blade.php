@@ -9,9 +9,9 @@
         </a>
         <ul class="sidenav-second-level collapse" id="collapseUsers">
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ url('schedule') }}" class="nav-link">
                     <i class="fas fa-list-ul"></i>
-                    <span class="nav-link-text">CC</span>
+                    <span class="nav-link-text">Schedule</span>
                 </a>
             </li>
             <li class="nav-item">
