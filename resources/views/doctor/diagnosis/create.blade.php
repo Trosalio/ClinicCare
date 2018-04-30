@@ -55,18 +55,9 @@
             <div class="form-group row">
               <label for="medicine" class="col-sm-2 col-form-label">Medicine</label>
               <div class="col-xs-6" id="to-do">
-                     <input type="text" class="form-control" id="med" name="medicine" value="{{ old('medicine') }}">
-                     <h1 id="list-med"></h1>
-                   <div class="form-group col-xs-6">
-                     <a class="btn btn-primary" id ="add" >Add Item</a>
-                   </div>
-                <ul id="list">
-
-                </ul>
-
+                     <textarea type="text" class="form-control" id="med" cols="60" name="medicine" value="{{ old('medicine') }}"> </textarea>
             </div>
             </div>
-            <a  class="btn btn-primary" href="">Medical Histories</a>
             <input type="submit" class="btn btn-success" name="save" value="submit">
             <a  class="btn btn-danger" href="{{ route('doctor.dashboard') }}">Cancel</a>
         </form>

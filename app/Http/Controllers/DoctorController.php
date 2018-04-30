@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Appointment;
 use App\Diagnosis;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -69,7 +70,7 @@ class DoctorController extends Controller
       $diagnosis->medicine = $request['medicine'];
       $diagnosis->save();
 
-      //AND want to delete queue in dashboard after create diagnosis
+      // want to delete queue in dashboard after create diagnosis
 
       return redirect('doctor/dashboard');
     }
@@ -88,5 +89,10 @@ class DoctorController extends Controller
 
       $diagnose->update($validatedData);
       return redirect('doctor/diagnose/show');
+    }
+    public function savePDF(Diagnosis $diagnose)
+    {
+        $pdf = PDF::loadView('doctor.diagnosis.pdf-diagnosis', ['diagnose' => $diagnose])->setPaper('a4', 'postscape');
+        return $pdf->download('Diagnosis.pdf');
     }
 }

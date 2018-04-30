@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label for="diagnosis" class="col-sm-2 col-form-label">Diagnosis</label>
+    <label for="diagnosis" class="col-sm-2 col-form-label">Opinion</label>
     <div class="col-xs-6">
       <textarea class="form-control" id="diagnosis" name="opinion" rows="4" cols="60">{{ $diagnose->opinion }}</textarea>
     </div>
@@ -50,8 +50,7 @@
 
   </div>
   </div>
-
-  <a type="button" class="btn btn-primary" href="{{ route('doctor.dashboard') }}">Medical Histories</a>
+  <a type="button" class="btn btn-primary" href="{{ route('diagnosis.savePDF',[$diagnose]) }}" target="_blank">Save to PDF</a>
   <input type="submit" class="btn btn-success" value="Save">
   <a type="button" class="btn btn-danger" href="{{ route('doctor.dashboard') }}">Cancel</a>
 </form>

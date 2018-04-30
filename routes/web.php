@@ -45,6 +45,7 @@ Route::group(
             ->name('doctor.editDiagnosis');
         Route::post('diagnose/show/{diagnose}', 'DoctorController@updateDiagnosis')
             ->name('diagnosis.update');
+        Route::get('pdf/{diagnose}', 'DoctorController@savePDF')->name('diagnosis.savePDF');
     }
 );
 
