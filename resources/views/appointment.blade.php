@@ -9,7 +9,7 @@
                 font-weight: 100;
                 /* height: 100%; */
                 margin: 0;
-            }
+        }
 
         .panel-heading {
             font-size: 30px;
@@ -47,9 +47,17 @@
 
 @section('title', Auth::user()->username )
 
-@section('navbar')
-    @include('inc.navbar')
-@stop
+@if (Auth::check())
+    @if (Auth::user()->role === 'client')
+        @section('navbar')
+            @include('client.inc.navbar')
+        @stop
+    @elseif (Auth::user()->role === 'doctor')
+        @section('navbar')
+            @include('doctor.inc.navbar')
+        @stop
+    @endif
+@endif
 
 @section('content')
 <div class="container">
