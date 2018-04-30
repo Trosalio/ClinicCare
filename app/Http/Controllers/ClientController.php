@@ -86,7 +86,6 @@ class ClientController extends Controller
 
     public function showDiagnosis()
     {   
-        echo Auth::user()->client->id;
         $diagnoses = \App\Diagnosis::where('client_id', Auth::user()->client->id)->get();
         return view('client/medicalDiag', ['diagnoses' => $diagnoses]);
         // return $diagnoses;
