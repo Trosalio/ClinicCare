@@ -31,7 +31,7 @@ class ScheduleController extends Controller
             }
             $app_list[] = Calendar::event(
                 $app->client->firstname,
-                true,
+                false,
                 new \DateTime($app->start_date),
                 new \DateTime($app->end_date),
                 1,
