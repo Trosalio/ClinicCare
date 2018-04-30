@@ -15,7 +15,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view('client.dashboard');
+        $appointments = \App\Appointment::where('client_id', Auth::user()->client->id)->get();
+        return view('client.dashboard',['appointments'=>$appointments]);
     }
 
     public function profile()
