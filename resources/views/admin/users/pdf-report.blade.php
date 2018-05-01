@@ -1,3 +1,6 @@
+@extends('layouts.pdf')
+
+@section('content')
 <h1>Reports</h1>
 <hr/>
 <h2>Member List</h2>
@@ -29,3 +32,4 @@
         </tbody>
     </table>
 </div>
+@stop

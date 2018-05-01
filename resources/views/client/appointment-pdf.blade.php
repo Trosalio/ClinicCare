@@ -1,3 +1,6 @@
+@extends('layouts.pdf')
+
+@section('content')
 <h1>Appointment - {{ $app->id }}</h1>
 <hr/>
 <h2>Client Info</h2>
@@ -89,3 +92,4 @@
         @endif
     </tr>
 </table>
+@stop
