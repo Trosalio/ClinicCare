@@ -35,7 +35,7 @@
 
                 </tbody>
             @endforeach
-            
+
         </table>
     </div>
     @push('style')
@@ -55,5 +55,5 @@
         });
     </script>
 @endpush
-    
+
     @stop

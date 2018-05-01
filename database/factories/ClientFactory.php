@@ -12,7 +12,7 @@ $factory->define(App\Models\Client::class, function (Faker $faker) {
         'weight' => $faker->numberBetween(50,150),
         'height' => $faker->numberBetween(100,180),
         'blood_type' => $faker->randomElement(['A+','A-','B+','B-','O+','O-','AB+','AB-']),
-        'intolerances' => $faker->optional()->realText(50),
-        'health_conditions' => $faker->optional()->realText(50),
+        'intolerances' => $faker->optional()->randomElement(['Mom', 'Peanut', 'Lactose']),
+        'health_conditions' => $faker->optional()->randomElement(['Lungs cancer', 'Cripping Depression', 'Immune to any kind of medication']),
     ];
 });

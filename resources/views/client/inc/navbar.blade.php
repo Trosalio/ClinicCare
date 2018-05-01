@@ -4,7 +4,7 @@
     <li class="nav-item">
         <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseUsers"
            data-parent="#accordion">
-            <i class="fas fa-users"></i>
+            <i class="fas fa-user"></i>
             <span class="nav-link-text">Client</span>
         </a>
         <ul class="sidenav-second-level collapse" id="collapseUsers">

@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
-@section('title', Auth::user()->username )
+@section('title')
+    Editing {{ ucfirst(Auth::user()->username) }} Profile
+@stop
 
 @section('navbar')
     @if(Auth::user()->role === 'doctor')

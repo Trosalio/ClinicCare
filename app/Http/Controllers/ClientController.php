@@ -35,16 +35,6 @@ class ClientController extends Controller
 
     public function update(Request $request)
     {
-        if (Auth::user()->role === 'doctor') {
-            $request->validate([
-                'work_day' => 'required|boolean',
-                'weekday' => 'required_if:work_day,1',
-                'start_hour' => 'required|numeric|between:9,16',
-                'end_hour' => 'required|numeric|between:10,17',
-                'medical_license_no' => ['required', 'string', 'size:10', Rule::unique
-                ('doctors')->ignore(Auth::user()->doctor->id)]
-            ]);
-        }
         $request->validate([
             'firstname' => 'required|alpha',
             'lastname' => 'required|alpha',
@@ -59,6 +49,16 @@ class ClientController extends Controller
             'intolerances' => 'nullable|string',
             'health_conditions' => 'nullable|string',
         ]);
+        if (Auth::user()->role === 'doctor') {
+            $request->validate([
+                'work_day' => 'required|boolean',
+                'weekday' => 'required_if:work_day,1',
+                'start_hour' => 'required|numeric|between:9,16',
+                'end_hour' => 'required|numeric|between:10,17',
+                'medical_license_no' => ['required', 'string', 'size:10', Rule::unique
+                ('doctors')->ignore(Auth::user()->doctor->id)]
+            ]);
+        }
         if (Auth::user()->role === 'doctor') {
             Auth::user()->doctor->medical_license_no = $request->input('medical_license_no');
             Auth::user()->doctor->work_day = $request->input('work_day');

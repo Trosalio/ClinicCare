@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
-@section('title', Auth::user()->username )
+@section('title')
+    {{ ucfirst(Auth::user()->username) }} Profile
+@stop
 
 @section('content')
     @if ($status)

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title')
-    User Detail - {{ $user->id }}
+@section('title')
+    User Detail: {{ $user->username }}
 @stop
 
 @section('content')

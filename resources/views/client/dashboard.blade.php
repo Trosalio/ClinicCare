@@ -1,5 +1,11 @@
 @extends('layouts.master')
-@section('title', 'Appointment' )
+
+@section('title')
+    @Auth
+        {{ ucfirst(Auth::user()->username) }}'s Appointment
+    @endauth
+@stop
+
 @section('navbar')
     @include('client.inc.navbar')
 @stop

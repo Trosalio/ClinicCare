@@ -24,6 +24,11 @@ Route::group(['middleware' => ['auth', 'check_role:client,doctor']], function ()
     Route::put('profile', 'ClientController@update')->name('profile.update');
     Route::get('profile/edit', 'ClientController@edit')->name('profile.edit');
     Route::get('diagnosis', 'ClientController@showDiagnosis')->name('client.show');
+
+// Routes appointment page
+    Route::get('/appointment/{id}', 'AppointmentController@index');
+    Route::get('/appointment/{id}/pdf', 'AppointmentController@savePDF')->name('appointment.savePDF');
+    Route::post('/appointment/{app}', 'AppointmentController@statusUpdate');
 });
 
 // Routes exclusively for doctor
@@ -63,7 +68,3 @@ Route::group(
 Route::get('/schedule', 'ScheduleController@index');
 Route::post('/schedule', 'ScheduleController@addApp');
 
-// Routs appointment page
-Route::get('/appointment/{id}', 'AppointmentController@index');
-Route::get('/appointment/{id}/pdf', 'AppointmentController@savePDF')->name('appointment.savePDF');
-Route::post('/appointment/{app}', 'AppointmentController@statusUpdate');

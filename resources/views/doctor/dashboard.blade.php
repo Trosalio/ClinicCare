@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+@section('title', 'Doctor\'s Appointments')
 @section('navbar')
     @include('doctor.inc.navbar')
 @stop

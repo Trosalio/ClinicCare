@@ -17,8 +17,8 @@ $factory->define(App\Appointment::class, function (Faker $faker) {
     $random_date = $starts_at = Carbon::createFromTimestamp($faker->dateTimeBetween($startDate = '+2 days', $endDate = '+1 week')->getTimeStamp())->setTime(9, 0, 0);
     $start_at = Carbon::createFromFormat('Y-m-d H:i:s', $random_date)->addHours($faker->numberBetween(1, 8))->addMinutes($faker->randomElement([0, 30]));
     return [
-        'name' => $faker->realText(50),
-        'description' => $faker->realText(200),
+        'name' => $faker->randomElement(['Seek help', 'Just Nodging', 'Wonder if I upload this..']),
+        'description' => $faker->randomElement(['Feeling Punchy', 'Feeling headache', 'Cannot feel my legs', 'I have crippling depression']),
         'start_date' => $start_at,
         'end_date' => Carbon::createFromFormat('Y-m-d H:i:s', $start_at)->addHours($faker->numberBetween(1, 8)),
         'status' => $faker->numberBetween(0, 2),

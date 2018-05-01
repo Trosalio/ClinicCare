@@ -74,16 +74,6 @@ class UserController extends Controller
             'email' => 'required|email|between:4,50|unique:users,username',
             'role' => ['required', Rule::in(UserController::$roles)],
         ]);
-
-        if ($request->input('role') === 'doctor') {
-            $request->validate([
-                'work_day' => 'required|boolean',
-                'weekday' => 'required_if:work_day,1',
-                'start_hour' => 'required|numeric|between:9,16',
-                'end_hour' => 'required|numeric|between:10,17',
-                'medical_license_no' => 'required|string|size:10|unique:doctors,medical_license_no'
-            ]);
-        }
         $request->validate([
             'firstname' => 'required|alpha',
             'lastname' => 'required|alpha',
@@ -96,6 +86,15 @@ class UserController extends Controller
             'intolerances' => 'nullable|string',
             'health_conditions' => 'nullable|string',
         ]);
+        if ($request->input('role') === 'doctor') {
+            $request->validate([
+                'work_day' => 'required|boolean',
+                'weekday' => 'required_if:work_day,1',
+                'start_hour' => 'required|numeric|between:9,16',
+                'end_hour' => 'required|numeric|between:10,17',
+                'medical_license_no' => 'required|string|size:10|unique:doctors,medical_license_no'
+            ]);
+        }
         $user = new User;
         $user->username = $request->input('username');
         $user->email = $request->input('email');
