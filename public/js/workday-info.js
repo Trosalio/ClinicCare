@@ -22,6 +22,7 @@ $(document).ready(function () {
     $(function () {
         let start_hour = $("#start_hour");
         let end_hour = $("#end_hour");
+
         start_hour.change(function () {
             let max = parseInt(start_hour.attr('max'));
             let min = parseInt(start_hour.attr('min'));
@@ -31,6 +32,7 @@ $(document).ready(function () {
             else if (start_hour.val() < min) {
                 start_hour.val(min);
             }
+
         });
         end_hour.change(function () {
             let max = parseInt(end_hour.attr('max'));
@@ -42,11 +44,15 @@ $(document).ready(function () {
                 end_hour.val(min);
             }
         });
-        start_hour.click(function () {
-            end_hour.attr('min', parseInt(start_hour.val()) + 1);
+        start_hour.click(function (e) {
+            if(e.value !== undefined){
+                end_hour.attr('min', parseInt(start_hour.val()) + 1);
+            }
         });
         end_hour.click(function () {
-            start_hour.attr('max', end_hour.val() - 1);
+            if(e.value !== undefined){
+                start_hour.attr('max', end_hour.val() - 1);
+            }
         });
     });
 });
